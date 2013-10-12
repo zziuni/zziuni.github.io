@@ -1,16 +1,1252 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[zziuni's Blog]]></title>
   <link href="http://zziuni.github.io/atom.xml" rel="self"/>
   <link href="http://zziuni.github.io/"/>
-  <updated>2013-10-12T21:37:12+09:00</updated>
+  <updated>2013-10-13T01:42:30+09:00</updated>
   <id>http://zziuni.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[zziuni]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Grunt:Getting Started in korean]]></title>
+    <link href="http://zziuni.github.io/blog/2013/10/13/grunt-getting-started-in-korean/"/>
+    <updated>2013-10-13T00:01:00+09:00</updated>
+    <id>http://zziuni.github.io/blog/2013/10/13/grunt-getting-started-in-korean</id>
+    <content type="html"><![CDATA[<blockquote><p><a href="http://gruntjs.com">Grunt</a>은 Javascript Task Runner 입니다. 이 문서는 Grunt <a href="http://gruntjs.com/getting-started">Getting Started</a> 문서의 번역입니다.</p></blockquote>
+
+<!-- more -->
+
+
+<p><img src="http://gruntjs.com/img/grunt-logo.svg" alt="" /></p>
+
+<h1>Getting started</h1>
+
+<p>Grunt와 Grunt 플러그인은 <a href="">npm</a>으로 설치하고 관리된다. npm은 <a href="">Node.js</a>의 페키지 메니저 도구다.</p>
+
+<p>Grunt &ndash;.4.x는 Node.js 버전이 <code>&gt;=0.8.0</code> 이여야 한다.</p>
+
+<h2>Installing the CLI</h2>
+
+<p><strong>Grunt 0.3에서 업그레이드 하는 거라면, <a href="http://gruntjs.com/getting-started#grunt-0.3-notes">Grunt 0.3 Notes</a>를 봐라.</strong></p>
+
+<p>Grunt를 사용하려면 먼저 Grunt&rsquo;s Command line interface (CLI)를 설치해야 한다. OSX나 nix, BSD에서는 sodo가, 윈도우즈에서는 administrator 권한이 필요할 수도 있다.</p>
+
+<pre><code>npm install -g grunt-cli
+</code></pre>
+
+<p>이 명령어는 여러분의 시스템 경로에 <code>grunt</code> 명령어를 설정해서 어느 디렉토리에서나 사용할 수 있게 만든다.</p>
+
+<p>주의할 점은 <code>grunt-cli</code>는 Grunt task runner를 설치하지 않는다는 것이다. Grunt CLI의 역활은 간단하다. <code>Gruntflie</code>이 있는 곳에 설치된 버전의 Grunt를 실행하는 것이다. 즉, 같은 장비에서 여러 버전의 Grunt를 설치할 수 있다.</p>
+
+<h2>How the CLI works</h2>
+
+<p><code>grunt</code>실행할 때 마다 node의 <code>require()</code>를 사용해서 프로젝트 로컬의 grunt를 실행함. 그러므로 프로텍트 하위 폴더 어디서든 <code>grunt</code>를 실행할 수 있다.</p>
+
+<p>로컬에 인스톨된 Grunt를 찾으면 CLI는 Grunt 라이브러리의 로컬 인스톨본을 불러온다. 이때 <code>Gruntfile</code>의 환경설정을 적용하고, 동작하기 위해서 설정한 task들을 실행한다.</p>
+
+<p>무슨일이 일어나느지 궁금하면 <a href="https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt">코드</a>를 읽어보자. 겁나 짧다.</p>
+
+<h2>Preparing a new grunt project</h2>
+
+<p>특별히 설정을 하지 않은 셋업은 프로젝트에 두 개의 파일을 추가한다. <code>package.json</code>과 <code>Grunfile</code>이다.</p>
+
+<p><strong>package.json</strong>: 이 파일은 <a href="https://npmjs.org/">npm</a>이 npm 모듈로 해당 프로젝트를 출판할때 사용할 메타데이터 저장을 위해 사용된다. 이 파일의 <a href="https://npmjs.org/doc/json.html#devDependencies">devDependencies</a>에 여러분의 프로젝트에 필요한 grunt와 Grunt 플러그인들을 나열할 수 있다.</p>
+
+<p><strong>Gruntfile</strong>: 이 파일의 이름은 <code>Grunffile.js</code>이거나 <code>Grunffile.coffee</code>이다. task를 설정하거나 정의하고 Grunt 플러그인을 불러오는데 사용한다.</p>
+
+<h3>package.json</h3>
+
+<p><code>package.json</code>파일은 <code>Gruntfile</code>과 함께 프로젝트 루트 디렉토리에 있어야 하고, 프로텍트 소스에 속해야 한다. <code>package.json</code>이 있는 폴더에서 <code>npm install</code>를 실행하면 파일안에 dependency 목록의 최신 버전을 인스톨한다.</p>
+
+<p>프로젝트에 <code>package.json</code>를 추가하는 방법은 여러가지가 있다.</p>
+
+<ul>
+<li>대부분의 <a href="http://gruntjs.com/project-scaffolding#h5o-9">grunt-init</a> 템플릿은 자동으로 프로젝트 전용  <code>package.json</code>파일을 생성한다.</li>
+<li>[npm init] 컴맨드 명령어는 기본 <code>package.json</code>을 생성한다.</li>
+<li>다음 예제를 참고해서 필요한 부분은 <a href="https://npmjs.org/doc/json.html">specification</a>을 참고해서 확장한다.</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;my-project-name&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;version&quot;</span><span class="o">:</span> <span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;~0.4.1&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;grunt-contrib-jshint&quot;</span><span class="o">:</span> <span class="s2">&quot;~0.6.3&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;grunt-contrib-nodeunit&quot;</span><span class="o">:</span> <span class="s2">&quot;~0.2.0&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;grunt-contrib-uglify&quot;</span><span class="o">:</span> <span class="s2">&quot;~0.2.2&quot;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Installing Grunt and gruntplugins</h4>
+
+<p>Grunt와 플러그인을 <code>package.json</code>와 연동해서 설치하는 가장 쉬운 방법은 <code>npm install &lt;module&gt; --save-dev</code> 컴맨드를 사용하는 것이다. <code>&lt;module&gt;</code>만 설치하지 않고, 자동으로 <code>package.json</code>의 <a href="https://npmjs.org/doc/json.html#devDependencies">devDependencies</a> 항목에 추가된다. 버전은 <a href="https://npmjs.org/doc/json.html#version">tiled version range</a>를 사용한다.</p>
+
+<p>예를 들면, 다음은 프로젝트에 Grunt 최신버전을 설치하고 devDependencies 항목에 추가한다.</p>
+
+<pre><code>npm install grunt --save-dev
+</code></pre>
+
+<p>grunt 프러그인과 다른 node 모듈도 마찬가지다. 이렇게 설치하면 프로젝트의 <code>package.json</code>이 갱신된다.</p>
+
+<h3>The Gruntfile</h3>
+
+<p><code>Gruntfile.js</code>나 <code>Grunffile.coffee</code>파일은 프로젝트 루트 폴더에 있어야 하는 자바스크립트 혹은, 커피스크립트 파일이다. 프로젝트 소스의 일부어야 한다.</p>
+
+<p><code>Gruntfile</code>은 다음 부분들로 구성되어 있다.</p>
+
+<ul>
+<li>&ldquo;wrapper&rdquo; 함수.</li>
+<li>프로젝트와 task의 환경설정.</li>
+<li>grunt plugin과 task 로딩.</li>
+<li>사용자 정의 task</li>
+</ul>
+
+
+<h4>An sample Gruntfile</h4>
+
+<p>다음 <code>Grunffile</code>은 <code>package.json</code> 파일에서 프로젝트의 메타데이터를 Grunt config로 인포트 하고, <a href="">grunt-contrib-uglify</a>플러그인의 <code>uglify</code> 타스크를 소스코드를 minify하기 위해서 설정했다. 그리고 메타데이터를 이용해서 동적인 베너 주석을 생성한다. 컴맨드 라인에 <code>grunt</code> 명령어를 실행하면 기본값으로 <code>uglify</code> 타스크가 실행된다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Project configuration.</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">pkg</span><span class="o">:</span> <span class="nx">grunt</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nx">readJSON</span><span class="p">(</span><span class="s1">&#39;package.json&#39;</span><span class="p">),</span>
+</span><span class='line'>    <span class="nx">uglify</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">banner</span><span class="o">:</span> <span class="s1">&#39;/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today(&quot;yyyy-mm-dd&quot;) %&gt; */\n&#39;</span>
+</span><span class='line'>      <span class="p">},</span>
+</span><span class='line'>      <span class="nx">build</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;src/&lt;%= pkg.name %&gt;.js&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;build/&lt;%= pkg.name %&gt;.min.js&#39;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Load the plugin that provides the &quot;uglify&quot; task.</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-contrib-uglify&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">// Default task(s).</span>
+</span><span class='line'>  <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;uglify&#39;</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>이제 여러분은 <code>Grunfile</code>의 전체 모습을 보았다. 이제 컴포넌트 파트를 보자.</p>
+
+<h4>The &ldquo;wrapper&rdquo; function</h4>
+
+<p>모든 <code>Gruntfile</code>(그리고 플러그인)은 래퍼(wrapper) 함수를 기본 형태로 사용한다. 모든 Grunt 코드는 이 함수 안쪽에 있어야 한다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">){</span>
+</span><span class='line'>    <span class="c1">// Do grunt-related things in here</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Project and task configuration</h4>
+
+<p>대부분의 Grunt task는 <a href="http://gruntjs.com/grunt#grunt.initconfig">grunt.initConfig</a> 메서드에서 인자로 전달된 객체의 configuraton 데이터를 참조한다.</p>
+
+<p>위의 예제에서, <code>grunt.file.readJSON('package.json')</code> 코드는 grunt config로 <code>package.json</code>에 저장된 JOSN 메타데이터를 인포트한다. 그러면 <code>&lt;% %&gt;</code> 템플릿 문사열이 config의 모든 프로퍼티를 참조할 수 있다. 파일패스나 파일 목록 같은 configuration 데이터는 반복을 줄이기 위해서 이 방법으로 지정한다.</p>
+
+<p>configuraton 객체안에 임의의 객체를 저장한다면, 여러분의 task가 요청하는 프로퍼티와 충돌하지 않는이상, 무시된다. 그리고 이 파일은 단순 JSON이 아니라 자바스크립트 파일이므로, 유효한 JS코드는 모두 사용가능하다. 필요하면 configuration을 프로그래밍적으로 생성할 수도 있다. ㅌ</p>
+
+<p>다른 task도 마찬가지지만, <a href="http://github.com/gruntjs/grunt-contrib-uglify">grunt-contrib-uglify</a> 플러그인의 <code>uglify</code> task는 configuration을 통해서 같은 이름의 프로퍼티에 설정할 값이 들어오길 기대한다. 여기서는 <code>banner</code> 옵션을 지정했다. 그리고 소스파일(src) 하나를 타겟파일(dest) 하나로 미니파이(minify)하는 어그리파이(uglify) 타켓명인 <code>build</code>를 지정했다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Project configuration.</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+</span><span class='line'>  <span class="nx">pkg</span><span class="o">:</span> <span class="nx">grunt</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nx">readJSON</span><span class="p">(</span><span class="s1">&#39;package.json&#39;</span><span class="p">),</span>
+</span><span class='line'>  <span class="nx">uglify</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">banner</span><span class="o">:</span> <span class="s1">&#39;/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today(&quot;yyyy-mm-dd&quot;) %&gt; */\n&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">build</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;src/&lt;%= pkg.name %&gt;.js&#39;</span><span class="p">,</span>
+</span><span class='line'>      <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;build/&lt;%= pkg.name %&gt;.min.js&#39;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>Loading grunt plugins and tasks</h4>
+
+<p>자주 사용하는 <a href="">concatenation</a>, <a href="">minification</a>, <a href="">linting</a>같은 task들은 <a href="">grunt plugin</a>처럼 사용할 수 있다. 즉, <code>package.json</code>의 dependency에 플러그인을 설정하기만 하면, <code>npm install</code>을 통해서 이미 설치되었고, 간단한 명령어로 <code>Gurntfile</code>에서 사용가능하다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Load the plugin that provides the &quot;uglify&quot; task.</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">&#39;grunt-contrib-uglify&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>주의사항</strong>: <code>grunt --help</code> 명령어를 사용하면 사용가능한 taks 목록을 볼 수 있다.</p>
+
+<h4>Custom tasks</h4>
+
+<p><code>default</code> task를 설정하면 기본으로 실행할 task를 하나이상 지정할 수 있다. 예를 들면, 컴맨드 라인에 특정 task를 지정하지 않고 <code>grunt</code>를 입력하면 <code>uglify</code> task가 실행된다. 이는 실제로는 <code>grunt uglify</code>나 <code>grunt default</code>와 같다. 배열안에는 여러 task를 지정할 수 있다. (아규먼트는 있을 수도 있고 없을 수도 있다.)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">// Default task(s)</span>
+</span><span class='line'><span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;uglify&#39;</span><span class="p">]);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>만약 프로젝트에 Grunt 프러그인이 지원하지 않는 task가 필요하다면, <code>Gruntfile</code>에 직접 custom task를 만들 수 있다. 예를 들면, 다음 <code>Gruntfile</code>은 task configuration을 전혀 활용하지 않는 custom <code>default</code> task를 정의했다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">){</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// A very basic default task.</span>
+</span><span class='line'>      <span class="nx">grunt</span><span class="p">.</span><span class="nx">registorTask</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;Long some stuff&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">grunt</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s1">&#39;Logging some stuff...&#39;</span><span class="p">).</span><span class="nx">ok</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>프로젝트 전용 task라면 <code>Gruntfile</code>안에 정의할 필요없이. 별도의 <code>.js</code> 파일로 정의하고 <a href="http://gruntjs.com/grunt#grunt.loadtasks">grunt.loadTask</a> 메서드로 불러오면 된다.</p>
+
+<h3>Further Reading</h3>
+
+<ul>
+<li><a href="http://gruntjs.com/installing-grunt/">Installing grunt</a> 가이드는 인스톨 스펙, 프로덕션, 개발, Grunt와 grunt-cli의 버전에 대한 상세한 정보를 제공한다.</li>
+<li><a href="http://gruntjs.com/configuring-tasks/">Configuring Tasks</a> 가이드는 <code>Gruntfile</code>에서 task, target, option, file을 설정하는 방법을 상세하게 설명한다. tempaltes, globbing pattern, importing external data도 설명한다.</li>
+<li><a href="http://gruntjs.com/creating-tasks/">Creating Tasks</a> 가이드는 Grunt task의 타입간의 차이점 목록을 제공하고, task와 configuration의 샘플을 제공한다.</li>
+<li>custom task나 Grunt 플러그인에 대한 더 많은 정보는 <a href="http://gruntjs.com/grunt">developer documentation</a>을 확인하자.</li>
+</ul>
+
+
+<h3>Grunt 0.3 Notes</h3>
+
+<p>Grunt 0.3에서 업그레이드 할거라면 전역 <code>grunt</code>를 제거해야 한다.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">npm</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">g</span> <span class="nx">grunt</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>*이 안내서는 Grunt 0.4.x를 위해 작성되었다. 하지만 Grunt 0.3.x에서도 유효하다. 다만, &ldquo;The Gruntfile&#8221;절의 플러그인 명과 task configuration 옵션은 다를 수 있다. *</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chrome DevTools Revolutions 2013 in korea]]></title>
+    <link href="http://zziuni.github.io/blog/2013/10/12/chrome-devtools-revolutions-2013-in-korea/"/>
+    <updated>2013-10-12T23:59:00+09:00</updated>
+    <id>http://zziuni.github.io/blog/2013/10/12/chrome-devtools-revolutions-2013-in-korea</id>
+    <content type="html"><![CDATA[<blockquote><p>이 글은 HTML5Rocks의 <a href="http://www.html5rocks.com/en/tutorials/developertools/revolutions2013/#toc-canvas-profiling">Chrome DevTools Revolutions 2013</a>을 번역한 글입니다.</p></blockquote>
+
+<h2>Introduction <a href="" id="introduction">#</a></h2>
+
+<p>웹 애플리케이션의 복잡도와 기능 증가와 함께 Chrome DevTools도 같이 커졌다. Paul Irish이 이와 관련해서 구글 I/O 2013에서 <a href="https://www.youtube.com/watch?v=x6qe_kVaBpg">Chrome DevTools Revolutions 2013</a>라는 발표를 했다. 웹 앱을 제작하고 테스트하는 방법을 혁신할 수 있는 DevTools의 최신 기능을 볼 수 있다.</p>
+
+<!-- more -->
+
+
+
+
+<iframe width="560" height="315" src="http://zziuni.github.io//www.youtube.com/embed/x6qe_kVaBpg" frameborder="0" allowfullscreen></iframe>
+
+
+<p>파울의 발표를 못봤다면 위에있는 동영상을 보자.(기다릴테니 보고오삼.) 아니면 다음 기능 목록으로 건너뛰자.</p>
+
+<ul>
+<li>개발용 코드 에디터로 DevTools의 <a href="#workspaces">Workspaces</a>를 사용하자.</li>
+<li>Sass를 사용한다면, DevTools에서 Sass(.scss) 파일을 라이브 에디팅하는 기능에 주목하자. 변경사항이 즉시 페이지에 반영된다.</li>
+<li>기존에도 안드로이드용 크롬의 페이지를 원격으로 디버깅할 수 있기는 했지만, 이제 <a href="#adb_extension">ADB extension</a>이 안드로이드 기기와의 연결을 담당한다. 그리고 <a href="#reverse_port_forwarding">Reverse port forwarding</a>로 안드로이드 장비에서 여러분의 개발 머신의 localhost로 쉽게 연결하자.</li>
+<li>성능은 항상 웹 앱의 주요 관심사다. 그래서 DevTools은 병목현상 추적을 돕는 몇가지 새로운 기능을 추가했다. CPU 프로파일링을 위한 <a href="#flame_chart">Flame Chart</a> 시각화, 렌더링 관련 성능 문제와 사용 메모리을 디버깅하기 위한 <a href="#performance_features">몇가지 새로운 도구</a>를 제공한다.
+이 기능들은 크롬 stable 버전 28부터 제공한다.</li>
+</ul>
+
+
+<h2>Workspaces <a href="" id="workspaces">#</a></h2>
+
+<p>로컬 웹서버 리소스를 workspaces를 통해서 디스크의 파일로 매핑할 수 있다. 그래서 DevTools의 Source panel에서 모든 타입의 소스를 수정할 수 있고 그 변경사항은 디스크에 반영된다. 반대로 외부 에디터에서 변경해도 즉시 Source panel에 적용된다.</p>
+
+<p>아래 스크린샷은 workspaces의 예제다. 달력 사이트가 localhost에 떠 있고, Sources panel은 로컬 파일 시스템에 있는 이 사이트의 루트 폴더를 보여준다. 이 폴더 안의 파일을 변경하면 디스트에 저장된다. 스크린샷은 아직 저장되지 않은 변경사항이 Calender.css에 있다. 그래서 asterisk(별표)가 파일명 옆에 붙어있다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/552x327xworkspace-sources-panel.png.pagespeed.ic.A9HdSGEKP_.webp" alt="image" /></p>
+
+<p>Control+S 나 Cmmand+S로 디스크에 저장한다.</p>
+
+<p>그리고 Elements panel에서 문서요소의 스타일을 변경하면, Source panel과 외부 에디터에 반영된다. 하지만 다음 사항에 주의하자.</p>
+
+<ul>
+<li>DOM은 Elements panel에서 변경해도 저장되지 않는다. 오직 CSS 스타일 변경만 저장된다.</li>
+<li>별도 CSS 파일로 정의된 CSS 스타일만 변경할 수 있다. element.style 변경이나 인라인 스타일은 디스크에 저장되지 않는다. 인라인 스타일은 Sources panel에서 변경할 수 있다.</li>
+<li>Elements panel에서 CSS 스타일 변경은 바로 저장된다. Control+S나 Command+S를 누를 필요 없다.</li>
+</ul>
+
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/620x225xworkspace-elements-panel.png.pagespeed.ic.OoXTC47sJz.webp" alt="image" /></p>
+
+<h3>workspace 폴더 추가하기 <a href="" id="add_workspaces_folder">#</a></h3>
+
+<p>workspaces를 사용하려면 두 단계를 거쳐야 한다. DevTools에서 사용할 로컬 폴더의 콘텐츠를 만들고, <a href="#mapping_workspaces_folder">그 폴더를 URL로 매핑</a>한다.</p>
+
+<p>새로운 workspace 폴더를 만들기 위해서는</p>
+
+<ol>
+<li>DevTools에서 <strong>Settings</strong>를 클릭.</li>
+<li><strong>Workspace</strong> 클릭.</li>
+<li><strong>Add Folder</strong> 클릭.</li>
+<li>프로젝트 소스 파일들이 있는 폴더를 열어서 <strong>Select</strong> 클릭</li>
+<li>경고가 뜨면, DevTools가 폴더 접근을 할 수 있도록 <strong>Allow</strong> 클릭</li>
+</ol>
+
+
+<p>Sources panel에 불러온 소스가 새로운 workspace 폴더로 출력된다. 이제 workspace folder에서 라이브 에디팅을 할 수 있고 그 변경사항은 디스크에 저장된다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/491x198xadded-workspace-folder.png.pagespeed.ic.W_v5Ilwd1n.webp" alt="image" /></p>
+
+<h3>폴더를 URL과 매핑하기 <a href="" id="mapping_workspaces_folder">#</a></h3>
+
+<p>workspace 폴더를 추가한 후에는 그 폴더를 URL에 매핑할 수 있다. 그러면 크롬이 특정 URL을 불러올 때마다 Source panel에서 URL 콘텐츠에 대한 위치로 workspace 폴더 콘텐츠를 출력한다.</p>
+
+<p>workspace 폴더를 URL로 매핑하려면</p>
+
+<ol>
+<li>Source panel에서 workspace 폴더의 파일을 오른쪽 클릭하거나 Control+클릭을 한다.</li>
+<li><strong>Map to Newwork Resource</strong>를 선택한다.
+<img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/415x182xmap-to-resource-menu.png.pagespeed.ic.fFTApZIYmf.webp" alt="image" /></li>
+<li>현재 불러온 페이지의 리소스 중에서 일치하는 리소스를 선택하자.
+<img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/547x280xselect-resource.png.pagespeed.ic.mAuSXJ7N3I.webp" alt="image" /></li>
+<li>크롬에서 해당 페이지를 새로 고침 한다.</li>
+</ol>
+
+
+<p>이렇게 하면, Source panel은 localhost의 소스가 아니라, 여러분의 로컬 workspace 폴더의 콘텐츠를 그냥 바로 보여준다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/462x189xmapped-workspace-folder.png.pagespeed.ic.GQwrmD6ZtB.webp" alt="image" /></p>
+
+<blockquote><p>Note: 여전히 localhost 소스를 바라보고 있다면 크롬을 새로 고침 하자.</p></blockquote>
+
+<p>네트워크 폴더를 workspace 폴더로 연결하는 다른 방법도 있다.</p>
+
+<ul>
+<li>network reosurce에서 오른쪽 클릭(Control+클릭)을 하고 <strong>Map to File System Resource</strong>를 선택하자.</li>
+<li>DevTools Setting의 Workspace 탭에서 수동으로 매핑을 추가한다.</li>
+</ul>
+
+
+<h2>Sass debugging (experimental) <a href="" id="sass_debugging">#</a></h2>
+
+<p>이 기능을 이용하면 Sources panel에서 Sass(.scss) 파일을 라이브 에디팅 하고 DevTools을 떠나지않고(새로 고침 없이) 바로 결과를 확인할 수 있다. 여러분이 Sass로 생성된 CSS가 반영된 문서요소를 탐색할 때, Elements penel에는 Sass가 생성한 .css가 아니라 .scss 파일이 출력된다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xsass-debugging.png.pagespeed.ic.jGeiBSbVrl.webp" alt="image" /></p>
+
+<p>링크를 클릭하면 Sources panel에 수정 가능한 SCSS 파일이 뜬다. 맘대로 수정 가능.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xsass-sources.png.pagespeed.ic.ugimWXRG6A.webp" alt="image" /></p>
+
+<p>DevTools에서든, 별도 에디터에서든 SCSS 파일을 변경해서 저장하면, Sass 컴파일러가 CSS를 재생성한다. 그리고 DevTools는 그 파일을 다시 로드한다.</p>
+
+<blockquote><p>주의: 기술적으로, 이 기능은 소스맵(source map)을 지원하는 모든 CSS 프리프로세서(Less같은)에서 동작해야 하지만 현재는 Sass만 지원한다. 이 기능이 실험단계를 벗어나면, Sass만 지원하는 한계가 없어짐에 따라서 기능명이 바뀔 수 있다.</p></blockquote>
+
+<h3>Sass debugging 사용하기 <a href="" id="using_sass_debugging">#</a></h3>
+
+<p>이 기능을 쓰려면 <a href="http://sass-lang.com/download.html">pre-release verson of the Sass compiler</a>이 필요하다. 이 버전은 현재 소스 맵 생성을 지원하는 유일한 버전이다.</p>
+
+<pre><code>gem install sass -v '&gt;=3.3.0alpha' --pre
+</code></pre>
+
+<p>DevTools 실험 기능에서 Sass debugging feature를 활성화해야 한다.</p>
+
+<ol>
+<li>크롬에서 <strong>about:flags</strong> 를 연다.</li>
+<li><strong>Enable Developer Tools experiments</strong> 를 활성화한다. (한글 버전은 <strong>개발자 도구 실험을 사용합니다</strong>)</li>
+<li>크롬 재실행.</li>
+<li>DevTools Setting을 열고 <strong>Experiments</strong>를 클릭</li>
+<li><strong>Support for Sass</strong> 혹은 <strong>Sass stylesheet debugging</strong>을 활성화한다. (브라우저 버전에 따라 살짝 이름이 다르다.)</li>
+</ol>
+
+
+<p>Sass를 설치하고 나서 Sass 파일 변경을 감지하고 생성된 CSS파일를 위한 소스맵을 생성할 Sass 컴파일러를 실행한다.</p>
+
+<pre><code>sass --watch --sourcemap sass/style.scss:style.css
+</code></pre>
+
+<p>Compass를 사용한다면, Sass pre-release 버전이 아직 Compass를 지원하지 않으므로 Sass Debugging과 같이 사용할 수 없다.</p>
+
+<h3>동작방식  <a href="" id="how_it_works">#</a></h3>
+
+<p>개별 SCSS 소스 파일이 처리되는 동안, Sass 컴파일러는 CSS 파일과 함께 <a href="http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/">소스 맵</a>파일(.map)을 생성한다. 소스탬 파일은 .scss 파일과 .css 파일의 매핑 정보가 담긴 JSON 파일이다. 각 CSS 파일은 특별한 주석으로 그 안에 자신의 소스맵 파일의 URL을 정의한 힌트를 갖고 있다.</p>
+
+<pre><code>/*# sourceMappingURL=&lt;url&gt;  */
+</code></pre>
+
+<p>예를 들어 다음 같은 SCSS 파일이 있다면,</p>
+
+<pre><code>&lt;!-- styles.scss --&gt;
+$textSize: 26px;
+$fontColor: red;
+$bgColor: whitesmoke;
+
+h2 {
+    font-size: $textSize;
+    color: $fontColor;
+    background: $bgColor;
+}
+</code></pre>
+
+<p>Sass는 sourceMappingURL 주석이 달린 CSS 파일과 생성한다.</p>
+
+<pre><code>&lt;!-- styles.css --&gt;
+h2 {
+  font-size: 24px;
+  color: orange;
+  background-color: darkblue;
+}
+/*# sourceMappingURL=styles.css.map */
+</code></pre>
+
+<p>다음은 소스맵 파일 샘플이다.</p>
+
+<pre><code>{
+  "version": "3",
+  "mappings":"AAKA,EAAG;EACC,SAAS,EANF,IAAI;EAOX,KAAK..."
+  "sources": ["sass/styles.scss"],
+  "file": "styles.css"
+}
+</code></pre>
+
+<h2>안드로이드용 크롬 원격 디버깅을 좀 더 쉽게 하기 <a href="" id="remote_debugging">#</a></h2>
+
+<p>셋업을 통해서 좀 더 쉽게 Android의 Chrome을 원격 디버깅할 수 있는 기능이 두 개 추가됐다. <a href="#adb_extension">ADB extension</a>과 <a href="#reverse_port_forwarding">revers port worwarding</a>이다.</p>
+
+<p>ADB extension은 원격 디버깅 설정 과정을 최소화해준다. 장점은 다음과 같다.</p>
+
+<ul>
+<li>ADB(Android Debug Bridge)가 내장되어있어서 설치할 필요가 없다.</li>
+<li>컴맨드 라인을 사용하지 않아도 된다.</li>
+<li>ADB 데몬 시작/종료, 연결된 장비 열람이 엄청나게 쉽다.</li>
+</ul>
+
+
+<p>Reverse port forwarding은 localhost의 서버로 안드로이드용 크롬이 접속하기 쉽게 해준다. 어떤 네트워크 환경은 동일 DNS 트릭이 없으면 접속이 어렵다.</p>
+
+<h3>ADB extension 사용하기 <a href="" id="adb_extension">#</a></h3>
+
+<p>먼저 크롬 웹 스토어에서 <a href="https://chrome.google.com/webstore/detail/adb/dpngiggdglpdnjdoaefidgiigpemgage">ADB Chrome extension</a>을 설치한다. (<strong>Add a Chrome</strong> 클릭)</p>
+
+<blockquote><p>크롬 웹 스토어의 익스텐션 설치는 Window8에서는 안된다. 설치에 문제가 있다면 대안으로 <a href="https://developers.google.com/chrome-developer-tools/docs/remote-debugging">Remote Debugging on Android</a>를 보자.</p></blockquote>
+
+<p>설치 후, 크롬에 회색 처리된 Android 메뉴가 뜬다. ADB를 시작하려면 아이콘을 클릭하고 <strong>Start ADB</strong>를 클릭한다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xadb-menu.png.pagespeed.ic.rCpd-6yJzJ.webp" alt="image" /></p>
+
+<p>ADB가 시작되면, 아이콘이 녹색으로 바뀐다. 그리고 현재 연결된 Android 기기 수가 표시된다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xadb-menu-active.png.pagespeed.ic.QoykBuX1_v.webp" alt="image" /></p>
+
+<p><strong>View Devices</strong>를 클릭하면 연결된 기기와 그 기기의 Chrome 탭들을 보여주는 <strong>about:inspect</strong> 페이지가 뜬다. DevTools에서 그 탭을 깔려면 &ldquo;inspect&#8221;를 클릭한다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xabout-inspect.png.pagespeed.ic.IB1dutLTXA.webp" alt="image" /></p>
+
+<p>연결기기가 안 보이면, USB연결이 잘 되어있는지, <strong>USB debugging</strong>이 Android 의 Chrome에 설정되어있는지 확인한다. 자세한 소개와 트러블슈팅은 <a href="https://developers.google.com/chrome-developer-tools/docs/remote-debugging#enable-usb-debugging">Remote Debugging on Android</a>를 참고하자.</p>
+
+<h3>Reverse port forwarding(experimental) <a href="" id="reverse_port_forwarding">#</a></h3>
+
+<p>일반적으로 개발자는 로컬 개발 머신에서 웹 서버를 돌리고, 그 사이트에 Android 장비로 연결하고 싶어한다. 서버와 Android 장비가 동일 네트워크에 있다면 복잡하지 않다. 하지만 사내 네트워크 같은 경우에는 DNS trick을 잘 적용하지 않으면 연결이 불가능한 경우도 있다. 안드로이드용 크롬의 새 기능 중에 이 문제를 간단히 해줄 <em>reverse port forwarding</em>라는 기능이 추가되었다. 이 기능은 USB를 통해서 개발 장비의 특정 포트로 트래픽을 보내는 Android 장비의 TCP 포트 리스링을 생성한다.</p>
+
+<p>이 기능을 사용하기 위해서는</p>
+
+<ul>
+<li>개발 장비에 크롬 28이상을 설치한다.</li>
+<li>안드로이드 장비에 안드로이드 용 크롬 베타를 설치한다.</li>
+<li><a href="http://developer.android.com/tools/help/adb.html">Android Debug Bridge</a> (ADB Chrome extension 아니면 Android SDK 전체)를 개발 PC에 설치한다.</li>
+</ul>
+
+
+<p>revers port forwarding를 사용하려면, <a href="#adb_extension">Using the ADB extension</a>에서 설명한 것 처럼 원격 디버깅을 할 장비가 연결돼야만 한다. 그러고 나서 reverse port forwarding을 활성화하고 여러분의 애플리케이션을 위한 port forwarding 규칙을 추가한다.</p>
+
+<p>먼저 reverse port forwarding을 활성화한다.</p>
+
+<ol>
+<li>개발 PC에서 크롬을 실행한다.</li>
+<li><strong>about:flags</strong>에서 <strong>Enable Developer Tools experiments</strong>를 활성화하고 크롬을 재실행한다. (한글 버전은 <strong>개발자 도구 실험을 사용합니다</strong>)</li>
+<li><strong>about:inspect</strong>를 연다. 그러면 탭 안에 모바일 장비가 보여야 한다.</li>
+<li>사이트 목록 우측에 있는 &ldquo;inpect&#8221;를 클릭한다.</li>
+<li>DevTools 창이 열린다. 거기서 Setting 패널을 연다.</li>
+<li>Experiments 를 누르고, <strong>Enable reverse port forwarding</strong>을 클릭한다.</li>
+<li>DevTools를 닫고, <strong>about:inspect</strong>로 돌아온다.</li>
+</ol>
+
+
+<p>그러고 나서 port forwarding 규칙을 추가한다.</p>
+
+<ol>
+<li>&ldquo;inspect&#8221;를 클릭해서 DevTools를 다시 연다. 그리고 다시 Setting으로 들어간다.</li>
+<li><strong>Port Forwarding</strong> 탭을 클릭한다.</li>
+<li><strong>Devide port</strong> 필드에 Android 장비에서 크롬이 연결해야 할 포트 번호를 입력한다. (기본값은 8080)</li>
+<li><strong>Target</strong> 필드에는 여러분의 개발 PC에서 돌고 있는 웹 앱의 포트 번호를 입력한다.</li>
+</ol>
+
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xport-forwarding.png.pagespeed.ic.10P58COCsE.webp" alt="image" /></p>
+
+<ol>
+<li>안드로이드용 크롬에서 <strong>localhost:[device-port-number]</strong>를 열자. [device-port-number]는 <strong>Device port</strong>필드에 입력한 값이다.</li>
+</ol>
+
+
+<p>그러면 개발 장비에서 가져온 콘텐츠가 보여야 한다.</p>
+
+<h2>자바스크립트 프로파일링을 위한 Flame chart 시각화 <a href="" id="flame_chart">#</a></h2>
+
+<p>새로운 Flame chart는 시간 흐름에 따른 Javascript 프로세싱의 시각적 표현을 지원한다. Timeline과 Network panel에서 보아온 것과 유사하다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xflame-chart-1.png.pagespeed.ic.BSC62lh_fA.webp" alt="image" /></p>
+
+<p>가로축은 시간 흐름이고 세로축은 콜 스택(call stack)이다. 패널 위쪽에는 전체 레코딩을 보여주는 오버뷰가 있다. 아래 스크린샷에서 보는 것처럼 마우스로 오버뷰 일부를 선택해서 &ldquo;줌 인&#8221;할 수 있다. 하단의 상세 타임라인은 그에 따라 줄어든다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xflame-chart-2.png.pagespeed.ic.1ysnU5qraA.webp" alt="image" /></p>
+
+<p>하단 콜 스택의 상세 뷰는 함수 &ldquo;불록&#8221;의 스택을 표현한다. 위쪽에 쌓인 불록은 그 아래쪽 함수 불록이 호출했다. 불록위에 마우스를 올리면 함수명과 타이밍 데이터가 출력된다.</p>
+
+<ul>
+<li><strong>Name</strong> &ndash; 함수명</li>
+<li><strong>Self time</strong> &ndash; 이 함수의 해당 호출이 완료되는데 걸린 시간. 내부에서 호출하는 다른 함수들을 제외하고 자기 자신만의 실행시간.</li>
+<li><strong>Total time</strong> &ndash; 이 함수의 해당 호출이 완료되는데 걸린 시간. 내부에서 호출하는 함수들도 포함한다.</li>
+<li><strong>Aggregated self time</strong> &ndash; 레코딩 기간동안 이 함수의 모든 호출에 대한 전체 시간. 이 함수가 호출하는 다른 함수들의 호출 시간은 포함하지 않는다.</li>
+<li><strong>Aggregated total time</strong> &ndash; 이 함수의 모든 호출에 대한 전체 시간. 이 함수가 호출하는 다른 함수들의 호출 시간도 모두 포함한다.</li>
+</ul>
+
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xflame-chart-3.png.pagespeed.ic.t48br1oeBT.webp" alt="image" /></p>
+
+<p>함수 불록을 클릭하면 Sources panel에서 그 함수가 있는 자바스크립트 파일이 열린다. 그리고 그 함수가 정의된 라인으로 이동한다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xflame-chart-sources.png.pagespeed.ic.axKNMB9dbW.webp" alt="image" /></p>
+
+<p>Flame chart를 이용하려면</p>
+
+<ol>
+<li>DevTools에서 <strong>Profiles</strong> Panel의 <strong>Profiles</strong> 탭을 선택한다.</li>
+<li><strong>Record JavaScript CPU profile</strong>를 선택하고 <strong>Start</strong>를 클릭한다.</li>
+<li>데이터 수집이 끝나면, <strong>Stop</strong>를 클릭한다.</li>
+<li>profile 뷰에서 <strong>Flame Chart</strong> 시각화를 선택한다.</li>
+</ol>
+
+
+<p><img src="http://www.html5rocks.com/en/tutorials/developertools/revolutions2013/flame-chart-menu.png" alt="image" /></p>
+
+<h2>핵심 성능 측정 도구 다섯가지 <a href="" id="performance_features">#</a></h2>
+
+<p>DevTools에 비약적으로 좋아진 부분은 성능 이슈 조사를 위한 신규 기능들이다.</p>
+
+<ul>
+<li>지속적인 페인팅 모드(Continuous painting mode)</li>
+<li>사각형과 레이어 페인팅 외곽선 보여주기(Showing Paint rectangles and layer borders)</li>
+<li>FPS 계기판(FPS meter)</li>
+<li>강제로 동기화되는 레이아웃 찾기(Finding forced synchronous layouts, layout thrashing)</li>
+<li>객체 할당 추적하기(Object allocation tracking)</li>
+</ul>
+
+
+<h3>지속적인 페인팅 모드(Continuous painting mode)</h3>
+
+<p>Continuous painting mode는 개별 문서요소나 CSS 스타일의 렌더링 비용 식별을 돕는 DevTools Setting의 옵션이다. (Rendering > Enable Continuous page repainting)</p>
+
+<p>일반적으로, 크롬은 레이아웃이나 스타일이 변경될 때만 화면을 페인팅하며, 이마저도 갱신이 필요한 영역만 한다. 하지만 이 옵션을 활성화 하면, 전체 화면이 계속 리페인팅 된다. 그리고 페이지를 페인팅하기 위해서 크롬이 소비한 시간을 페인팅 회수의 범위와 함께 우측 상단에 보여준다. 그래프는 최근 페인팅 횟수의 분포를 보여주고, 히스토그램을 가로지르는 가로선은 16.6ms 를 나타낸다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xpaint-times.png.pagespeed.ic.4GHJaoT9je.webp" alt="image" /></p>
+
+<p>이 기능은 Elements 패널 안에서 DOM 트리를 돌아다니며 개별 문서요소를 숨기거나(현재 선택된 문서요소를 숨기려면 H를 누르면 된다.), 아니면 문서요소의 CSS 스타일을 비활성화할 때 효과를 볼 수 있다. 이런 식으로 한 문서요소나 스타일이 페이지 렌더링에 얼마나 부하를 주는지 볼 수 있다. 만약 렌더링 비용이 있다면, 페이지 페인트 회수가 변경돼서 우측 상단에 출력된다. 단일 문서요소를 숨겼는데, 페인팅 회수를 크게 줄었다면, 여러분은 그 문서요소의 구조나 스타일 개선에 집중해야 한다.</p>
+
+<p>Continuous painting mode를 활성화하려면</p>
+
+<ol>
+<li>DevTools Setting을 연다.</li>
+<li><strong>General</strong> 탭에서 <strong>Rendering</strong>아래에 <strong>Enable continuous page repainting</strong>을 활성화한다.</li>
+</ol>
+
+
+<blockquote><p>만약 이 옵션이 안 보이면, <strong>about:flags</strong>에 들어가서, <strong>GPU compositing on all pages</strong>를 활성화하고 크롬을 재실행한다.</p></blockquote>
+
+<p>더 자세한 정보는 <a href="http://updates.html5rocks.com/2013/02/Profiling-Long-Paint-Times-with-DevTools-Continuous-Painting-Mode">Profiling Long Paint Times with DevTools&#8217; Continuous Painting Mode</a>를 참고하자.</p>
+
+<h3>사각형과 레이어 페인팅 외곽선 보여주기()Showing paint rectangles and layer borders)</h3>
+
+<p>화면에서 페인팅 되고 있는 사각형 영역을 시각적으로 보여주는 옵션이다. (Setting > Rendering > Show paint rectangles). 예를 들어, 아래 스크린샷은 CSS 호버 효과가 적용되는 영역을 빨간색 사각형으로 보여주고 있다. 이 정도는 화면대비 작은 영역이라 괜찮다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/paint-rect-1.png.pagespeed.ce.9c4qALXuVJ.png" alt="image" /></p>
+
+<p>개발자는 전체 화면의 리페인팅을 일으키는 디자인이나 개발은 피하기를 원한다. 예를 들어, 다음 스크린샷을 보면, 사용자는 페이지를 스크롤하는 중이다. 페인팅 사각형 하나가 스크롤바를 감싸고 있고, 남은 페이지 영역 전체를 다른 페인팅 사각형이 감싸고 있다. 이 경우 이렇게 되는 원인은 Body의 배경 이미지다. 이미지 위치가 CSS에서 fixed로 지정되어있어서 스크롤마다 전체 페이지를 리페인팅 시킨다.</p>
+
+<p><img src="http://www.html5rocks.com/en/tutorials/developertools/revolutions2013/paint-rect-2.png" alt="image" /></p>
+
+<h3>FPS 계기판(FPS meter)</h3>
+
+<p><strong>FPS meter</strong>는 페이지의 현재 초당 프레임율, 최대/최소 프레임율, 시간당 프레임율을 보여주는 막대 그래프와 프레임율 변화를 보여주는 히스토그램을 출력한다.</p>
+
+<p><img src="http://www.html5rocks.com/en/tutorials/developertools/revolutions2013/fps-meter.png" alt="image" /></p>
+
+<p>FPS 계기판을 보려면</p>
+
+<ol>
+<li>DevTools Settings를 연다.</li>
+<li><strong>General</strong>를 클릭한다.</li>
+<li><strong>Rendering</strong> 아래에, <strong>Force accelerated compositing</strong>과 <strong>Show FPS meter</strong>를 활성화한다.</li>
+</ol>
+
+
+<p><strong>about:flag</strong>에서 <strong>FPS counter</strong>를 활성화하고 크롬을 재실행하면, FPS 계기판을 상항 보이게 할 수 있다.</p>
+
+<h3>강제로 동기화 되는 레이아웃 찾기(Finding forced synchronous layouts(layout thrashing))</h3>
+
+<p>렌더링 성능을 최대화하기 위해서, 크롬은 보통 애플리케이션이 요청하는 레이아웃 변경들을 한 번에 적용한다. 그리고 변경 요청을 비동기로 계산하고 렌더링할 레이아웃 전달 스케줄을 잡는다. 하지만 애플리케이션이 레이아웃 관련 프로퍼티를 요청하면(offsetHeight, offsetWidth같은), 크롬은 즉시 강제로 동기화시켜 페이지 레이아웃을 적용한다. 이를 <em>forced synchronous layouts</em>이라 부르는데, 이 현상은 중요한 렌더링 성능 저하를 가져올 수 있다. 특히 거대한 DOM 트리가 반복해서 적용될 때, 이를 &ldquo;layout thrashing&#8221;라고 부른다.</p>
+
+<p>Timeline panel에서 녹화를 하면, 관련 녹화물 옆에 노란색 경고 아이콘(<img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xwarning-icon.png.pagespeed.ic.kIYn6LmPe4.webp" alt="image" />)으로 forced synchronous layouts를 찾아서 알려준다. 그 녹화물에 마우스를 올리면 무효화된 레이아웃(invalidated layout)의 코드와 강요된 레이아웃(forced layout)의 코드에 대한 스택 트레이스가 출력된다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xforced-sync-layout-popup.png.pagespeed.ic.fvGqEI6wkY.webp" alt="image" /></p>
+
+<p>그리고 이 팝업은 레이아웃을 잡는 데 필요한 노드 수(nodes that need layout), 레이아웃을 다시 한 트리의 사이즈(layout tree size), 레이아웃의 유효범위(layout scope), 레이아웃 루트(layout root)도 같이 보여준다.</p>
+
+<p>더 자세한 정보는  <a href="https://developers.google.com/chrome-developer-tools/docs/demos/too-much-layout/">Timeline demo: Diagnosing forced synchronous layouts</a>를 보자.</p>
+
+<h3>객체 할당 트랙킹(Object allocation tracking)</h3>
+
+<p>Object allocation tracking은 시간별 할당을 보여주는 메모리 프로파일의 새로운 형태다. allocation tracking을 시작하면, DevTools은 시간별로 연속적으로 스냅샷을 쌓는다. allocation 프로파일은 객체가 어디서 생성되고 있는지, 어디서 참조되고 있는지를 보여준다.</p>
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/xallocation-tracker.png.pagespeed.ic.ejjMDH2Qku.webp" alt="image" /></p>
+
+<p>track object allocations를 사용하려면</p>
+
+<ol>
+<li>DevTools에서 <strong>Profiles</strong> 탭을 클릭한다.</li>
+<li><strong>Record heap allocations</strong>을 선택하고 <strong>Start</strong> 클릭한다.</li>
+<li>데이터 수집을 끝냈으면, <strong>Stop recording heap profile</strong>을 클릭한다. (해당 패널 좌측 하단의 빨간 원 아이콘)</li>
+</ol>
+
+
+<h2>Canvas profiling (experimental)</h2>
+
+<p>끝으로 아직 실험적인 기능인 Cavas profile은 canvas 문서요소에 만들어진 WebGL 호출을 녹화하고 재생한다. 개별 WebGL 호출을 관통하며 단계별로 진행해보고 렌더링된 결과를 볼 수 있다. 특별한 호출을 재실행하는 순간을 볼 수 있다.</p>
+
+<p>canvas profile을 사용하려면</p>
+
+<ol>
+<li>DevTools setting의 <strong>Experiments</strong>안에 <strong>Canvas profiling</strong>을 활성화한다. (Experiments 탭이 보이지 않으면, <strong>about:flags</strong>에서 <strong>Enable Developer Tools experiments</strong>를 활성화하고 크롬을 재실행한다. 한글 버전은 <strong>개발자 도구 실험을 사용합니다</strong>)</li>
+<li><strong>Profiles</strong> panel을 클릭한다.</li>
+<li><strong>Capture canvas frame</strong>을 선택하고 <strong>Take snapshot</strong>을 클릭한다.</li>
+<li>이제 canvas 프레임을 생성하는데 사용된 호출을 탐색할 수 있다.</li>
+</ol>
+
+
+<p><img src="http://1-ps.googleusercontent.com/x/s.html5rocks-hrd.appspot.com/www.html5rocks.com/en/tutorials/developertools/revolutions2013/canvas-profile.png.pagespeed.ce.vmnLpLctAQ.png" alt="image" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Build a simple client-side MVC app with RequireJS in korean]]></title>
+    <link href="http://zziuni.github.io/blog/2013/10/12/build-a-simple-client-side-mvc-app-with-requirejs-in-korean/"/>
+    <updated>2013-10-12T21:48:00+09:00</updated>
+    <id>http://zziuni.github.io/blog/2013/10/12/build-a-simple-client-side-mvc-app-with-requirejs-in-korean</id>
+    <content type="html"><![CDATA[<blockquote><p>이 글은 @verekia 씨가 작성한 <a href="http://verekia.com/requirejs/build-simple-client-side-mvc-app-require-js">Build a simple client-side MVC app with RequireJS</a>를 허락을 받아 번역한 글입니다.</p></blockquote>
+
+<p>웹 개발자라면 흔히 파일 하나로 자바스크립트 코드를 짜기 시작합니다. 그리고 그 코드가 점점 커져서 나중에는 수정하기가 정말 어려워지죠. 이런 문제의 해결하기 위해서 코드를 여러 파일로 쪼갤 수 있습니다.  하지만 그러면 script 태그가 많아지고 다른 파일에서 정의한 함수를 조회하기 위한 글로벌 변수가 많아집니다. 그래서 글로벌 네임스페이스는 지저분해지고, 추가한 js 파일들의 HTTP 요청이  네트워크 대역폭을 차지해서 정작 해당 페이지는 로딩이 느려집니다.</p>
+
+<!-- more -->
+
+
+<p>이런 일을 겪었다면 프런트 앤드 코드를 뭔가 다른 방법으로 관리해야 겠다는 필요성을 느끼게 됩니다. 특히 자바스크립트가 수천 라인이 넘는 대형 사이즈의 웹 앱을 제작해야 한다면 더욱 그렇습니다. 유지보수를 쉽게 할 수 있도록 이 모든 문제를 해결할 새로운 방법이 필요합니다. <strong>스크립트 로더</strong>가 바로 이를 위한 새로운 기법입니다. 스크립트 로더들은 웹에서 쉽게 찾을 수 있지만 여기서는 그중에서도 <strong>RequireJS</strong>라는 라이브러리를 보겠습니다.</p>
+
+<p>여러분은 단계별로 따라 하는 튜토리얼을 통해서 RequireJS 기반의 간단한  MVC(Model &ndash; View &ndash; Controller) 앱 제작법을 배울 겁니다. 스크립트 로더에 대한 사전 지식은 필요 없습니다. 이제 기초부터 살펴 봅시다.</p>
+
+<h2>개 요</h2>
+
+<h3>RequestJS란 무엇이고  왜 좋은가</h3>
+
+<p>RequireJS는 <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>(Asynchronous Module Definition)의 구현체입니다. AMD란 모듈을 정의하는 방법과 모듈이 필요할 때 비동기로 로딩하는 방법을 정의한 API 입니다. <a href="https://twitter.com/#!/jrburke">제임스 버크(James Burke)</a>씨가 개발했는데, 2년간 개발해서 겨우 버전 1.0을 찍었습니다. 여러분은 RequireJS로 Javascript코드를 모듈화 할 수 있고  비동기로 관리하면서 여러파일을 병렬로 다운로드 할 수 있습니다. 스크립트 파일이 필요할 때만 병렬로 로딩되기 때문에, 페이지 로딩 속도는 빨라집니다. 그래서 이게 대단한거죠!</p>
+
+<h3>프런트 앤드를 위한 MVC?</h3>
+
+<p>MVC는 서버 사이트 코드를 구조화하고 모듈로 만들며 유지보수가 용의하도록 돕는 매우 잘 알려진 <strong>디자인 패턴</strong>입니다. 그러면 프런트 앤드에서 MVC를 사용하려면 어떻게 해야 할까요? 자바스크립트에서 이 디자인패턴을 적용할 수 있을 까요? 만약 여러분이 자바스크립트를 단지 애니메이션과 폼 유효성 검사, 100라인이 넘지 않는 간단한 처리를 위해서 사용한다면 MVC를 사용해서 여러분의 스크립트 파일을 구조화할 필요 없습니다. RequireJS도 사용할 필요 없을 겁니다. 하지만, 뷰(view)가 많은 리치 웹 앱을 제작 중이라면 반드시 필요합니다!</p>
+
+<h3>우리가 만들어 볼 앱</h3>
+
+<p>RequireJS를 사용해서 MVC 코드로 구조화하는 감을 잡기 위해서 뷰가 딱 2개인 정말 간단한 앱을 만들어 보겠습니다.</p>
+
+<ul>
+<li>사용자 목록을 보여주는 뷰. (name 속성으로 나타낸)</li>
+<li>사용자를 추가할 수 있는 뷰.</li>
+</ul>
+
+
+<p>다음은 완성된 모습입니다.</p>
+
+<p>![] (<a href="http://farm8.staticflickr.com/7092/7350164136_ff1c1375a3.jpg">http://farm8.staticflickr.com/7092/7350164136_ff1c1375a3.jpg</a>)</p>
+
+<p>비즈니스 로직이 정~말 간단하기 때문에 여러분은 다른건 신경쓰지 않고 코드 구조화를 이해하는데만  집중 할 수 있습니다. 또한 이 튜토리얼을 읽으면서 같이 짜보기를 강력히 추천합니다. 진짜 간단하거든요. 오래걸리지 않습니다. 여러분이 모듈화 프로그래밍을 해본적이 없거나 RequireJS를 사용해본 적이 없다면,  프로그래밍 실력을 늘리는데 도움이 될겁니다. 후회 안 할테니 꼭 해보세요.</p>
+
+<h3>HTML과 CSS 파일</h3>
+
+<p>예제에서 사용할 HTML 마크업입니다.</p>
+
+<pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;A simple MVC structure&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id="container"&gt;
+        &lt;h1&gt;My users&lt;/h1&gt;
+        &lt;nav&gt;&lt;a href="#list"&gt;List&lt;/a&gt; - &lt;a href="#add"&gt;Add&lt;/a&gt;&lt;/nav&gt;
+        &lt;div id="app"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script data-main="js/main" src="js/require.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p><code>nav</code> 메뉴의 링크는 모든 페이지에서 유지할 앱의 네이게이션이고 <code>#app</code> div에서  MVC 애플리케이션의 마술이 일어납니다. <code>body</code> 끝에는 RequireJS를 추가했습니다. <code>script</code> 태그에 <code>data-main="js/main"</code> 이라는 특별한 속성을 추가했는데, 이 속성의 값은 RequireJS가 애플리케이션 전체의 경로 기준점으로 사용합니다.</p>
+
+<p>기본적인 스타일쉬트도 추가해 봅시다.</p>
+
+<pre><code>#container{
+    font-family:Calibri, Helvetica, serif;
+    color:#444;
+    width:200px;
+    margin:100px auto 0;
+    padding:30px;
+    border:1px solid #ddd;
+    background:#f6f6f6;
+    -webkit-border-radius:4px;
+       -moz-border-radius:4px;
+            border-radius:4px;
+}
+ 
+h1, nav{
+    text-align:center;
+    margin:0 0 20px;
+}
+</code></pre>
+
+<h3>OOP 돌아보기. 모듈(module)이란?</h3>
+
+<p>자바스크립트 객체 지향 프로프래밍에는 모듈 패턴(Module Pattern)이라는 정말 많이 사용하는 디자인 패턴이 있습니다. 이 패턴은 글로벌 네임스페이스를 지저분하게 하지 않고 객체 안에 메서드와 속성을 캡슐화하기 위해서 사용합니다.(그래서 <strong>모듈</strong>이라고 합니다.) 그리고 자바나 PHP 같은 다른 OOP 언어의 클래스를 흉내내기 위해서 사용하기도 합니다. 다음은 <code>main.js</code> 파일에 정의한 <code>MyMath</code>라는 간단한 모듈입니다.</p>
+
+<pre><code>var MyMath = (function(){
+ 
+    // Put your private variables and functions here
+ 
+    return { // Here are the public methods
+        add:function(a, b){
+            return a + b;
+        }
+    };
+})();
+ 
+console.log(MyMath.add(1, 2));
+</code></pre>
+
+<p>공개 메서드를 리터럴 객체 형태로 정의했지만 불편합니다. 대신에 리빌링 모듈 패턴(Revealing Module Pattern)을 사용해서 비공개 속성과 메서드를 반환 합니다.</p>
+
+<pre><code>var MyMath = (function(){
+ 
+    // With this pattern you can use the usual function notation:
+ 
+    function add(a, b){
+        return a + b;
+    }
+ 
+    return {
+        add:add // But don't forget to declare it in the returned object!
+    };
+})();
+ 
+console.log(MyMath.add(1, 2));
+</code></pre>
+
+<p>이 튜토리얼에서는 리빌링 모듈 패턴을 사용할 겁니다.</p>
+
+<h2>RequireJS</h2>
+
+<h3>RequireJS로 모듈 정의하기</h3>
+
+<p>앞 절에서 우리는 변수 MyMath에 호출할 모듈을 정의했습니다. 모듈을 꼭 이렇게 정의해야 하는건 아닙니다. 이번에는 RequireJS를 사용해 보겠습니다. RequireJS는 유지보수가 용의하도록 자바스크립트 파일을 쪼개는 역할을 합니다. 그래서 <code>main.js</code>와 같은 폴더에 <code>MyMath</code> 모듈을 정의할 <code>MyMath.js</code> 파일을 생성하겠습니다.</p>
+
+<pre><code>define(function(){
+ 
+    function add(a, b){
+        return a + b;
+    }
+ 
+    return {
+        add:add
+    };
+});
+</code></pre>
+
+<p>MyMath 변수는 사라졌고 <code>define</code> 함수의 파라미터로 모듈을 집어넣었습니다. <code>define</code>함수는 RequireJS가 제공하는 함수로 인데, 외부에서 모듈에 접근할 수 있도록 합니다.</p>
+
+<h3>main 파일에서 모듈 호출하기</h3>
+
+<p>그럼 다시 <code>main.js</code>파일로 돌아가겠습니다. RequireJS는 우리가 만든 <code>MyMath</code> 모듈을 호출하는데 사용할 <code>require</code>라는 함수도 제공합니다. <code>main.js</code>는 이렇게 바뀝니다.</p>
+
+<pre><code>require(['MyMath'], function(MyMath){
+ 
+    console.log(MyMath.add(1, 2)); 
+ 
+});
+</code></pre>
+
+<p><code>MyMath</code>를 호출하는 부분은 다음 두 파라미터를 가진 <code>require</code> 함수안에 있습니다.</p>
+
+<ul>
+<li>첫 파라미터는 로딩할 모듈의 배열입니다.  모듈의 경로는 경로 기준점(HTML파일의 data-main 속성이 생각나나요?) 기준으로 정의됩니다.  <code>.js</code> 확장자는 생략합니다.</li>
+<li>두번째 파라미터는 모듈이 로드될 때 호출할 함수입니다. 모듈은 이 함수의 파라미터로 전달됩니다. 그래서 그냥 모듈명을 파라미터 명으로 하면 됩니다.</li>
+</ul>
+
+
+<p>자. 그럼 이제 페이지를 리로드 해봅시다&hellip; 와우! 축하해요! 여러분은 다른 파일의 모듈을 호출했어요! 그렇습니다. 이건 정말 쉽습니다. 그러면 이제 여러분은 그 무섭다는 MVC 아키텍처를 할 준비가 된겁니다. MVC는 여러분이 정의한 모듈과 정말 비슷하게 동작합니다. 그러므로 당연히 할 수 있습니다.</p>
+
+<h2>MVC 패턴의 구조</h2>
+
+<blockquote><p><strong>잠깐</strong>! : 이 튜토리얼에서는 서버 사이드 MVC처럼 컨트롤러 하나에 뷰 하나를 연결합니다. 하지만 프런트 앤드 개발에서는 한 컨트롤러에 여러 뷰를 연결하는건 정말 일반적이며 이런 경우 뷰는 버튼이나 입력필드 같은 시각적인 컨포넌트가 됩니다. Backbone 같은 자바스크립트 MVC 프레임워크가 이같은 다른 접근을 사용합니다만 그건 이 글이 목적하는 바와는 다릅니다. 여기서 제 목표는 실제 사용하는 MVC 프레임워크 전부를 만들자는게 아니라 여러분이 이미 잘 알고 있는 구조들을 통해서 RequireJS가 어떻게 동작하는지를 그려보자는 겁니다.</p></blockquote>
+
+<p>일단 간단하게 우리 프로젝트의 파일과 폴더부터 생성합시다. 데이터를 표현하는 모델을 사용하려 합니다. 비즈니스 로직은 컨트롤러에서 다루고 그 컨트롤러는 페이지를 렌더링할 특정 뷰를 호출할 겁니다. 그럼 어떻게 될까요? 폴더는 Models, Controllers, Views가 필요하고 두 개의 컨트롤러와 두 개의 뷰, 하나의 모델이 필요합니다.</p>
+
+<p>자바스크립트 폴더구조는 다음과 같습니다.</p>
+
+<pre><code>* Controllers
+    * AddController.js
+    * ListController.js
+* Models
+    * User.js
+* Views
+    * AddView.js
+    * ListView.js
+* main.js
+* require.js
+</code></pre>
+
+<p>전체 구조가 준비되었나요? 좋습니다! 가장 간단한 모델 부터 구현합시다.</p>
+
+<h2>모델: User.js</h2>
+
+<p>이 예제에서  <code>User</code>는 <code>name</code> 속성 하나를 가진 간단한 클래스입니다.</p>
+
+<pre><code>define(function(){
+ 
+    function User(name){
+        this.name = name || 'Default name';
+    }
+ 
+    return User;
+});
+</code></pre>
+
+<p><code>main.js</code> 파일로 돌아와서, <code>require</code>  메서드로 <code>User</code>를 사용하게 정의할 수 있습니다. 그리고 예제 목적에 부합하게 사용자 목록을 생성해 보겠습니다.</p>
+
+<pre><code>require(['Models/User'], function(User){
+ 
+    var users = [new User('Barney'),
+                 new User('Cartman'),
+                 new User('Sheldon')];
+ 
+    for (var i = 0, len = users.length; i &lt; len; i++){
+        console.log(users[i].name);
+    }
+ 
+    localStorage.users = JSON.stringify(users);
+});
+</code></pre>
+
+<p>사용자 배열을 JOSN에서 시리얼라이즈 한 후에 데이터베이스처럼 접근하기 위해서 HTML5 로컬 스토리지에 저장합니다.</p>
+
+<p><img src="http://farm8.staticflickr.com/7238/7164952261_79b56e2412.jpg" alt="" /></p>
+
+<blockquote><p><strong>잠깐</strong> : JSON을 시리얼라이즈하는 stringify와 디시리얼라이즈하는 parse를 IE7에서 사용하려면 폴리필(polyfill)이 필요합니다. 더글라스 클락포트씨의 <a href="https://github.com/douglascrockford/JSON-js">Github 레파지토리</a>에 보면<code>json2.js</code>라고 있습니다.</p></blockquote>
+
+<h2>사용자 목록 출력</h2>
+
+<p>이제 이렇게 저장한 사용자를 출력할 차례입니다. 이 일을 할 <code>ListController.js</code>와 <code>ListView.js</code>를 만들겠습니다. 두 컴포넌트는 관련이 있습니다. 그래서 어떤 식으로든 연결이 되야 합니다. 많은 방법이 있습니다만 예제를 단순하게 하기 위해서 여기선 이렇게 하겠습니다. <code>ListView</code>는 <code>render</code>란 메서드를 갖고, <code>ListController</code>는 로컬 스토리지에서 가져온 사용자를 파라미터로 해서 <code>ListView의 render</code> 메서드를 호출합니다.  그렇습니다. <code>ListController</code>는 <code>ListView</code>에 의존합니다.</p>
+
+<p>RequireJS에서는 <code>require</code> 메서드처럼 <code>define</code> 메서드에서도 의존성 있는 관련 모듈을 배열로 넘길 수 있습니다. 모듈안에서 해당 컨트롤러의 메인 동작으로 놓을 <code>start</code> 메서드를 만듭시다. (뭐, <code>run</code>이나 <code>main</code>같은 이름도 좋습니다.) <code>ListController.js</code> 를 봅시다.</p>
+
+<pre><code>define(['Views/ListView'], function(ListView){
+ 
+    function start(){
+        var users = JSON.parse(localStorage.users);
+        ListView.render({users:users});
+    }
+ 
+    return {
+        start:start
+    };
+});
+</code></pre>
+
+<p>여기서는 로컬스토리지의 users를  디시리얼라이징 합니다. 그리고 <code>render</code>메서드에 객체로 넘깁니다. 이제 <code>ListView.js</code>의 <code>render</code> 메서드만 구현하면 끝이군요.</p>
+
+<pre><code>define(function(){
+ 
+    function render(parameters){
+        var appDiv = document.getElementById('app');
+ 
+        var users = parameters.users;
+ 
+        var html = '&lt;ul&gt;';
+        for (var i = 0, len = users.length; i &lt; len; i++){
+            html += '&lt;li&gt;' + users[i].name + '&lt;/li&gt;';
+        }
+        html += '&lt;/ul&gt;';
+ 
+        appDiv.innerHTML = html;
+    }
+ 
+    return {
+        render:render
+    };
+});
+</code></pre>
+
+<p><code>render</code> 메서드는 <code>#app</code> 문서요소에 집어넣을 HTML 문자열을 만들기 위해서 users를 순회작업 하는게 전부입니다.</p>
+
+<blockquote><p><strong>잠깐</strong> : 이런 식으로 자바스크립트 파일에서 HTML을 사용하는건 좋은 생각이 아닙니다. 나중에 수정할 때 너무 힘들거든요. 템플릿 사용을 고려해야 합니다. 템플릿은 HTML 마크업에 데이터를 넣는 훌륭한 방법입니다. 좋은 템플릿 시스템이 정말 많이 있습니다. 예를 들면 <a href="https://github.com/jquery/jquery-tmpl">jQuery-tmpl</a>이나 <a href="https://github.com/janl/mustache.js">Mustache.js</a> 가 있습니다. 하지만 이 글의 범위를 벗어나는 주제이고 지금의 구조를 복잡하게 만들겁니다. 여기선 단순하게 갑시다.</p></blockquote>
+
+<p>이제 <code>ListController</code> 모듈을 <strong>실행</strong>할 차례입니다. <code>main.js</code> 파일에서 <code>require</code> 메서드로 <code>ListController</code>를 선언하고 <code>ListController.start()</code>를 호출합시다.</p>
+
+<pre><code>require(['Models/User', 'Controllers/ListController'], function(User, ListController){
+ 
+    var users = [new User('Barney'),
+                 new User('Cartman'),
+                 new User('Sheldon')];
+ 
+    localStorage.users = JSON.stringify(users);
+ 
+    ListController.start();
+});
+</code></pre>
+
+<p>페이지를 리로드 하면 멋진 사용자 목록을 볼 수 있습니다.</p>
+
+<p><img src="http://farm8.staticflickr.com/7094/7350164284_74cb98faa9.jpg" alt="" /></p>
+
+<p>와~~! 이겁니다! 여러분도 같이 코딩했다면 축하합니다!</p>
+
+<blockquote><p><strong>잠깐</strong> : 지금은 라우팅 시스템이 없기때문에 실행하고 싶은 컨트롤러는 수동으로만 정의할 수 있습니다. 하지만 곧 정말 간단히 생성할 수 있게 됩니다. 기다리세요. ㅋ</p></blockquote>
+
+<h2>사용자 등록하기</h2>
+
+<p>이제 목록에 사용자를 등록할수 있으면 좋겠군요. 간단한 텍스트 입력 필드와 버튼를 보여주고 버튼을 클릭하면 로컬 스토리지에 사용자를 추가하는 이벤트 핸들러를 등록할 예정입니다. 앞에서 했던 작업과 비슷한 <code>AddController</code>에서 시작합시다. 이 파일은 뷰로 파라미터를 전혀 넘기지 않기때문에 무척 간단합니다.  <code>AddContoller.js</code>를 보시죠.</p>
+
+<pre><code>define(['Views/AddView'], function(AddView){
+ 
+    function start(){
+        AddView.render();
+    }
+ 
+    return {
+        start:start
+    };
+});
+</code></pre>
+
+<p>이어서 뷰 파일 <code>AddView.js</code>입니다.</p>
+
+<pre><code>define(function(){
+ 
+    function render(parameters){
+        var appDiv = document.getElementById('app');
+        appDiv.innerHTML = '&lt;input id="user-name" /&gt;&lt;button id="add"&gt;Add this user&lt;/button&gt;';
+    }
+ 
+    return {
+        render:render
+    };
+});
+</code></pre>
+
+<p>이제 여러분의 <code>main.js</code>파일에서 <code>AddController</code>를 정의해서 다음 뷰를 무사히 가져올 <code>start</code> 메서드를 호출할 수 있습니다.</p>
+
+<p><img src="http://farm8.staticflickr.com/7218/7164952349_2179e0f982.jpg" alt="" /></p>
+
+<p>하지만 아직 버튼에 이벤트 연결을 하지 않았으므로 지금의 뷰는 별 의미는 없습니다. 이제 그 작업을 하기전에 한가지 질문을 해봅니다. 클릭 이벤트에 대한 이벤트 로직은 어디에 놓아야 할까요? 뷰일까요? 컨트롤러일까요? 이벤트 리스너 위치가 뷰라고 생각하고 이벤트 비즈니스 로직을 놓는건 상당히 안 좋은 습관입니다. 비록 컨트롤러에 뷰에 있는 div의 ID가 없는게 더 좋으니까 완벽하다 할 수는 없지만 컨트롤러에 이벤트 로직를 놓는게 더 좋습니다.</p>
+
+<blockquote><p><strong>잠깐</strong> : 가장 좋은 방법은 뷰에는 이벤트 리스너 함수가 있고, 그 함수가 컨트롤러나 이벤트 처리 전용 모듈에 있는 비즈니스 로직 메서드를 호출하는 겁니다. 이 방식이 어려운건 아니지만 이 때문에 예제가 복잡해져서 여러분이 포기할길 원치는 않습니다. 연습할 때 시도해도 됩니다.</p></blockquote>
+
+<p>말한 것 처럼, 이벤트 로직을 컨트롤러에 짜봅시다. <code>AddController</code>에 <code>bindEvents</code> 함수를 만듭니다. 그리고 뷰가 HTML 렌더링을 끝내면 이 함수를 호출합니다.</p>
+
+<pre><code>define(['Views/AddView', 'Models/User'], function(AddView, User){
+ 
+    function start(){
+        AddView.render();
+        bindEvents();
+    }
+ 
+    function bindEvents(){
+        document.getElementById('add').addEventListener('click', function(){
+            var users = JSON.parse(localStorage.users);
+            var userName = document.getElementById('user-name').value;
+            users.push(new User(userName));
+            localStorage.users = JSON.stringify(users);
+            require(['Controllers/ListController'], function(ListController){
+                ListController.start();
+            });
+        }, false);
+    }
+ 
+    return {
+        start:start
+    };
+});
+</code></pre>
+
+<p><code>bindEvents</code>에서는 <code>#add</code> 버튼의 클릭 이벤트에 이벤트 리스너를 추가합니다. (IE의 <code>attachEvent</code>를 위해서 만들어둔 함수가 있다면 그걸 써도 되고 jQuery를 써도 됩니다. ) 버튼을 클릭하면, 로컬 스토리지에서 사용자를 users 변수에 문자열을 가져와서 배열로 디시리얼라이즈하고 <code>#user-name</code> 입력 필드에 있는 이름으로 새로운 user를 넣습니다. 그리고 갱신된 users 배열을 로컬 스토리지에 다시 저장합니다. <code>require</code>로 <code>ListController</code>를 가져와서 <code>start</code> 메서드를 실행합니다. 그러면 다음 화면을 볼 수 있습니다.</p>
+
+<p><img src="http://farm8.staticflickr.com/7218/7164952397_3190c81f3a.jpg" alt="" /></p>
+
+<p>멋지군요! 여기까지 예제를 같이 짰다면 이제 잠시 쉬어도 됩니다. 커피 한잔 타오고 계속하죠.</p>
+
+<h2>라우터로 뷰 화면간 이동하기</h2>
+
+<p>자 다시 합시다. 우리가 만든 앱은 상당히 멋져보이긴 하지만 실제로는 사용자를 한 명 더 추가하기 위해서  등록 뷰로 이동할 수 없으므로 영 별로입니다. 라우팅(<em>routing</em>) 시스템을 빼먹었습니다. 서버 사이드 MVC 프레임워크로 작업해본 적이 있다면 아마도 라우팅이 익숙할 겁니다. URL은 각자 다른 뷰를 불러옵니다. 하지만 우리는 클라이언트 사이드 작업을 하고 있고 서버 사이드와는 확실히 다릅니다. 이와 같은 자바스크립트 단일 페이지 인터페이스에서 해당 앱의 다른 부분으로 이동하려면 URL 해시(hash)를 사용합니다. 우리 경우에는 다음 URL을 입력할 때 두 개의 다른 뷰를 찾을 수 있어야 합니다.</p>
+
+<ul>
+<li><a href="http://yourlocalhostpath/#list">http://yourlocalhostpath/#list</a></li>
+<li><a href="http://yourlocalhostpath/#add">http://yourlocalhostpath/#add</a></li>
+</ul>
+
+
+<p>이렇게해서 각 페이지를 쉽게 접근할 수 있고 북마크도 가능해 집니다.</p>
+
+<blockquote><p><strong>잠깐</strong> : 파이어폭스, 크롬, 오페라는 HTML5 히스토리 관리(pushState, popState, replaceState) 지원 기능이 있어서 해시를 다루지 않아도 됩니다.</p></blockquote>
+
+<h3>브라우저 호환성과 응용</h3>
+
+<p>구형 브라우저를 지원해야 한다면 히스토리와 해시 이동 관리가 쉽지 않습니다. 지원하기로 정한 브라우저와 관련해서 여러분이 결정할 수 있는 몇가지 해법이 여기 있습니다.</p>
+
+<ul>
+<li><a href="http://caniuse.com/#search=history">가장 앞선 브라우저</a> : HTML5 history management.</li>
+<li><a href="http://caniuse.com/#search=hashchange">대부분의 최신 브라우저</a> : HTML5 hashchange event.</li>
+<li>구형 브라우저 : hash 변경 감시를 수동으로 해야 합니다.</li>
+<li>정말 오래된 브라우저 : 수동 감시 + iframe 핵</li>
+</ul>
+
+
+<p>이중에 구현이 간단한 수동 감시를 구현할 겁니다. n 밀리초 마다 hash가 변경되었는 지를 확인하는게 전부입니다. 변경이 확인되면 필요한 함수를 호출합니다.</p>
+
+<blockquote><p><strong>잠깐</strong> : 이 작업을 해주는 <a href="https://github.com/cowboy/jquery-hashchange">jQuery 플러그인</a>도 있습니다.</p></blockquote>
+
+<h3>라우터와 메인 라우터 순회</h3>
+
+<p><code>main.js</code> 다음에는 라우팅 로직을 관리할 <code>Router.js</code> 파일을 만듭시다. <code>Router.js</code>에서는 경로를 정의하고 URL에 정의된게 없을 때 사용할 기본값을 정의해야 합니다. 우리는 인스턴스에 <strong>해시(hash)</strong>와 관련 <strong>컨트롤러(controller)</strong>를 가진 객체의 단순 배열을 사용할 수 있습니다. URL에 해시가 없을 때 사용할 <strong>기본값(defaultRoute)</strong>도 필요합니다.</p>
+
+<pre><code>define(function(){
+ 
+    var routes = [{hash:'#list', controller:'ListController'},
+                  {hash:'#add',  controller:'AddController'}];
+    var defaultRoute = '#list';
+    var currentHash = '';
+ 
+    function startRouting(){
+        window.location.hash = window.location.hash || defaultRoute;
+        setInterval(hashCheck, 100);
+    }
+ 
+    return {
+        startRouting:startRouting
+    };
+});
+</code></pre>
+
+<p><code>startRouting</code>이 호출되면, URL에 기본 해시 값을 지정합니다. 그리고 <code>hashCheck</code>를 반복해서 호출하기 시작합니다. <code>hashCheck</code>는 아직 구현하지 않은 함수입니다. <code>currentHash</code> 변수는 해시 변경이 감지되면 해시의 현재 값을 저장할 때 사용합니다.</p>
+
+<h3>해시 변화 확인</h3>
+
+<p>이 함수가 <code>hashCheck</code>입니다. 100 밀리초마다 호출됩니다.</p>
+
+<pre><code>function hashCheck(){
+    if (window.location.hash != currentHash){
+        for (var i = 0, currentRoute; currentRoute = routes[i++];){
+            if (window.location.hash == currentRoute.hash)
+                loadController(currentRoute.controller);
+        }
+        currentHash = window.location.hash;
+    }
+}
+</code></pre>
+
+<p><code>hashCheck</code>는 <code>currentHash</code>와 값 비교를 해서 해시가 변경됬는지 확인합니다. 그리고 라우터중 하나와 일치하면 관련 컨트롤러 명으로 <code>loadController</code>를 호출합니다.</p>
+
+<h3>적절한 컨트롤러 로딩</h3>
+
+<p>이제, <code>loadController</code>는 컨트롤러의 모듈을 로드할 <code>require</code> 를 호출해서 해당 모듈의 <code>start</code> 함수를 실행합니다.</p>
+
+<pre><code>function loadController(controllerName){
+    require(['Controllers/' + controllerName], function(controller){
+        controller.start();
+    });
+}
+</code></pre>
+
+<p><code>Router.js</code>는 결국 이렇게 완성됩니다.</p>
+
+<pre><code>define(function(){
+ 
+    var routes = [{hash:'#list', controller:'ListController'},
+                  {hash:'#add',  controller:'AddController'}];
+    var defaultRoute = '#list';
+    var currentHash = '';
+ 
+    function startRouting(){
+        window.location.hash = window.location.hash || defaultRoute;
+        setInterval(hashCheck, 100);
+    }
+ 
+    function hashCheck(){
+        if (window.location.hash != currentHash){
+            for (var i = 0, currentRoute; currentRoute = routes[i++];){
+                if (window.location.hash == currentRoute.hash)
+                    loadController(currentRoute.controller);
+            }
+            currentHash = window.location.hash;
+        }
+    }
+ 
+    function loadController(controllerName){
+        require(['Controllers/' + controllerName], function(controller){
+            controller.start();
+        });
+    }
+ 
+    return {
+        startRouting:startRouting
+    };
+});
+</code></pre>
+
+<h3>새로 만든 라우팅 시스템 적용하기</h3>
+
+<p>이제 남은 일은 <code>main.js</code> 파일에서 라우터 모듈을 <code>require</code>로 요청해서 <code>startRouting</code> 함수를 호출하는 일 뿐입니다.</p>
+
+<pre><code>require(['Models/User', 'Router'], function(User, Router){
+ 
+    var users = [new User('Barney'),
+                 new User('Cartman'),
+                 new User('Sheldon')];
+ 
+    localStorage.users = JSON.stringify(users);
+ 
+    Router.startRouting();
+});
+</code></pre>
+
+<p>우리가 만드는 앱의 한 컨트롤러에서 다른 곳으로 이동하려면, 새 컨트롤러의 해시 경로로  현재 <code>window.hash</code>를 교체하면 됩니다. 이런 경우 새로운 라우팅 시스템 대신에 아직 수동으로 <code>AddController</code>의 <code>ListController</code>를 로딩하고 있습니다.</p>
+
+<pre><code>require(['Controllers/ListController'], function(ListController){
+    ListController.start();
+});
+</code></pre>
+
+<p>이 3줄을 해시 업데이트로 바꿔 버립시다.</p>
+
+<pre><code>window.location.hash = '#list';
+</code></pre>
+
+<p>자! 이겁니다. 우리 앱은 이제 응용 가능한 라우팅 시스템을 갖췄습니다. 한 뷰에서 다른 뷰로 이동할 수 있고, 반대로  URL에 원하는 해시를 넣을 수 있습니다. 그러면 정의된 라우터에 일치하는 해시를 찾아서 적절한 컨트롤러를 로딩합니다. 멋지죠?</p>
+
+<p><a href="http://verekia.com/demo/require-js/">동작하는 데모</a>는 여기서 보세요.</p>
+
+<h2>결론</h2>
+
+<p>여러분은 프레임워크 없이 완전한 MVC 앱을 만들었으므로 자부심을 가져도 됩니다. 모듈 생성에 필요한 필수 요소만 있는 파일들을 연결하기 위해서 RequireJS를 사용했을 뿐이죠. 그럼 다음은 뭘 해야 할까요? 이 튜토리얼을 보고 여러분이 직접한 이 작은 작업이 맘에 든다면 앱에 기능을 추가해서 우리가 만든 작은 프레임워크를 확장할 수 있습니다. 그러려면 필요한 새로운 기법들이 있습니다. 시도해볼 만한 다음 단계에 대해 몇가지 아이디어가 있습니다.</p>
+
+<ul>
+<li>템플릿 시스템을 통합합니다.</li>
+<li>라우팅 시스템처럼 앱과 직접 관련 없으면서 다른 프로젝트에서 재사용 가능한 부분을 분리해서 작은 확장 라이브러리를 생성합니다.</li>
+<li>그 라이브러리에서 모델, 뷰, 컨트롤러를 객체로 정의합니다.</li>
+<li>다양한 소스의 데이터(RESTfull APS, localStorage, IndexedDB 등)를 다룰 새로운 추상 계층을 생성합니다.</li>
+</ul>
+
+
+<p>이런 DIY 접근은 학습용으로는 훌륭하지만, 현시점에서 실 프로젝트에 적용하기에는 현재 프레임워크 상태가 그리 적합하지는 않습니다. 앞에 나열한 기능을 구현할만큼 부지런하지 않다면, 이미 존재하는 MVC 프레임워크 사용법을 배워 볼 수 있습니다. 가장 인기 있는 MVC 프레임워크입니다.</p>
+
+<ul>
+<li><a href="http://documentcloud.github.com/backbone/">Backbon</a></li>
+<li><a href="http://javascriptmvc.com/">JavaScriptMVC</a></li>
+<li><a href="http://www.sproutcore.com/">Sproutcore</a></li>
+<li><a href="http://www.sencha.com/products/extjs/">ExtJS</a></li>
+<li><a href="http://knockoutjs.com/">Knockout</a></li>
+</ul>
+
+
+<p>개인적으로는 최소화 버전이 5kb가 안되서 Backbone를 좋아합니다. 그래서 다음 튜토리얼은 RequireJS와 Backbone를 정말 멋지게 엮어서 사용하는 법에 대해 다룰 예정입니다. 이 내용을 알고 싶으면 <a href="http://twitter.com/#!/verekia">@verekia</a>를 팔로우 하세요. 그리고 <strong>애디 오스마니(Addy Osmani)</strong>씨의 <a href="http://addyosmani.com/blog/large-scale-jquery/">대형 jQuery 애플리케이션</a>과 <a href="http://addyosmani.com/writing-modular-js/">자바스크립트 모듈</a>에 대한 튜토리얼을 읽고 그를 팔로우 하고 RequireJS를 만든 <strong>제임스 퍼크(James Burke)</strong>씨도 팔로우하기를 추천합니다. 두 사람 모두 모듈 기반 자바스크립트 앱의 정보통입니다. 애디 오스마니씨는 <a href="http://addyosmani.github.com/todomvc/">TodoMVC</a>라는 프로젝트도 시작했습니다. TodoMVC는  간단한 동일 웹 앱을 각기 다른 MVC 프레임워크를 사용해서 만드는 방법을 비교하는 프로젝트입니다. 여러분이 적절한 프레임워크를 선택하는데 도움이 될 겁니다.</p>
+
+<p>오늘은 여기까집니다. 읽어주셔서 감사합니다.</p>
+]]></content>
+  </entry>
   
 </feed>

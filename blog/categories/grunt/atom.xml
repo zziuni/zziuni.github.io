@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Grunt | zziuni's Blog]]></title>
   <link href="http://zziuni.github.io/blog/categories/grunt/atom.xml" rel="self"/>
   <link href="http://zziuni.github.io/"/>
-  <updated>2013-10-13T02:03:52+09:00</updated>
+  <updated>2013-10-13T04:33:37+09:00</updated>
   <id>http://zziuni.github.io/</id>
   <author>
     <name><![CDATA[zziuni]]></name>
@@ -19,9 +19,6 @@
     <updated>2013-10-13T00:01:00+09:00</updated>
     <id>http://zziuni.github.io/blog/2013/10/13/grunt-getting-started-in-korean</id>
     <content type="html"><![CDATA[<blockquote><p><a href="http://gruntjs.com">Grunt</a>은 Javascript Task Runner 입니다. 이 문서는 Grunt <a href="http://gruntjs.com/getting-started">Getting Started</a> 문서의 번역입니다.</p></blockquote>
-
-<!-- more -->
-
 
 <p><img src="http://gruntjs.com/img/grunt-logo.svg" alt="" /></p>
 
@@ -41,6 +38,9 @@
 </code></pre>
 
 <p>이 명령어는 여러분의 시스템 경로에 <code>grunt</code> 명령어를 설정해서 어느 디렉토리에서나 사용할 수 있게 만든다.</p>
+
+<!-- more -->
+
 
 <p>주의할 점은 <code>grunt-cli</code>는 Grunt task runner를 설치하지 않는다는 것이다. Grunt CLI의 역활은 간단하다. <code>Gruntflie</code>이 있는 곳에 설치된 버전의 Grunt를 실행하는 것이다. 즉, 같은 장비에서 여러 버전의 Grunt를 설치할 수 있다.</p>
 

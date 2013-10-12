@@ -4,7 +4,7 @@
   <title><![CDATA[Category: AMD | zziuni's Blog]]></title>
   <link href="http://zziuni.github.io/blog/categories/amd/atom.xml" rel="self"/>
   <link href="http://zziuni.github.io/"/>
-  <updated>2013-10-13T02:03:52+09:00</updated>
+  <updated>2013-10-13T04:33:37+09:00</updated>
   <id>http://zziuni.github.io/</id>
   <author>
     <name><![CDATA[zziuni]]></name>
@@ -22,12 +22,12 @@
 
 <p>웹 개발자라면 흔히 파일 하나로 자바스크립트 코드를 짜기 시작합니다. 그리고 그 코드가 점점 커져서 나중에는 수정하기가 정말 어려워지죠. 이런 문제의 해결하기 위해서 코드를 여러 파일로 쪼갤 수 있습니다.  하지만 그러면 script 태그가 많아지고 다른 파일에서 정의한 함수를 조회하기 위한 글로벌 변수가 많아집니다. 그래서 글로벌 네임스페이스는 지저분해지고, 추가한 js 파일들의 HTTP 요청이  네트워크 대역폭을 차지해서 정작 해당 페이지는 로딩이 느려집니다.</p>
 
-<!-- more -->
-
-
 <p>이런 일을 겪었다면 프런트 앤드 코드를 뭔가 다른 방법으로 관리해야 겠다는 필요성을 느끼게 됩니다. 특히 자바스크립트가 수천 라인이 넘는 대형 사이즈의 웹 앱을 제작해야 한다면 더욱 그렇습니다. 유지보수를 쉽게 할 수 있도록 이 모든 문제를 해결할 새로운 방법이 필요합니다. <strong>스크립트 로더</strong>가 바로 이를 위한 새로운 기법입니다. 스크립트 로더들은 웹에서 쉽게 찾을 수 있지만 여기서는 그중에서도 <strong>RequireJS</strong>라는 라이브러리를 보겠습니다.</p>
 
 <p>여러분은 단계별로 따라 하는 튜토리얼을 통해서 RequireJS 기반의 간단한  MVC(Model &ndash; View &ndash; Controller) 앱 제작법을 배울 겁니다. 스크립트 로더에 대한 사전 지식은 필요 없습니다. 이제 기초부터 살펴 봅시다.</p>
+
+<!-- more -->
+
 
 <h2>개 요</h2>
 

@@ -13,18 +13,18 @@ categories: [DevTool, Chrome]
 
 웹 애플리케이션의 복잡도와 기능 증가와 함께 Chrome DevTools도 같이 커졌다. Paul Irish이 이와 관련해서 구글 I/O 2013에서 [Chrome DevTools Revolutions 2013](https://www.youtube.com/watch?v=x6qe_kVaBpg)라는 발표를 했다. 웹 앱을 제작하고 테스트하는 방법을 혁신할 수 있는 DevTools의 최신 기능을 볼 수 있다.
 
-<!-- more -->
-
 <iframe width="560" height="315" src="//www.youtube.com/embed/x6qe_kVaBpg" frameborder="0" allowfullscreen></iframe>
 
 파울의 발표를 못봤다면 위에있는 동영상을 보자.(기다릴테니 보고오삼.) 아니면 다음 기능 목록으로 건너뛰자.
-
 
 * 개발용 코드 에디터로 DevTools의 [Workspaces](#workspaces)를 사용하자.
 * Sass를 사용한다면, DevTools에서 Sass(.scss) 파일을 라이브 에디팅하는 기능에 주목하자. 변경사항이 즉시 페이지에 반영된다.
 * 기존에도 안드로이드용 크롬의 페이지를 원격으로 디버깅할 수 있기는 했지만, 이제 [ADB extension](#adb_extension)이 안드로이드 기기와의 연결을 담당한다. 그리고 [Reverse port forwarding](#reverse_port_forwarding)로 안드로이드 장비에서 여러분의 개발 머신의 localhost로 쉽게 연결하자.
 * 성능은 항상 웹 앱의 주요 관심사다. 그래서 DevTools은 병목현상 추적을 돕는 몇가지 새로운 기능을 추가했다. CPU 프로파일링을 위한 [Flame Chart](#flame_chart) 시각화, 렌더링 관련 성능 문제와 사용 메모리을 디버깅하기 위한 [몇가지 새로운 도구](#performance_features)를 제공한다.
 이 기능들은 크롬 stable 버전 28부터 제공한다.
+
+<!-- more -->
+
 
 ## Workspaces <a href="" id="workspaces">#</a>
 

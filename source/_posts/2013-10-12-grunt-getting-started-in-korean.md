@@ -4,12 +4,11 @@ title: "Grunt:Getting Started in korean"
 date: 2013-10-13 00:01
 comments: true
 categories: [Grunt, Javascript]
+banner: false
 ---
 
 
 >[Grunt](http://gruntjs.com)은 Javascript Task Runner 입니다. 이 문서는 Grunt [Getting Started](http://gruntjs.com/getting-started) 문서의 번역입니다.
-
-<!-- more -->
 
 ![](http://gruntjs.com/img/grunt-logo.svg)
 # Getting started
@@ -27,6 +26,8 @@ Grunt를 사용하려면 먼저 Grunt's Command line interface (CLI)를 설치�
     npm install -g grunt-cli
 
 이 명령어는 여러분의 시스템 경로에 `grunt` 명령어를 설정해서 어느 디렉토리에서나 사용할 수 있게 만든다.
+
+<!-- more -->
 
 주의할 점은 `grunt-cli`는 Grunt task runner를 설치하지 않는다는 것이다. Grunt CLI의 역활은 간단하다. `Gruntflie`이 있는 곳에 설치된 버전의 Grunt를 실행하는 것이다. 즉, 같은 장비에서 여러 버전의 Grunt를 설치할 수 있다.
 

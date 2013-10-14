@@ -41,7 +41,7 @@ rdiscount:
     - smart
 pygments: false # default python pygments have been replaced by pygments.rb
 
-paginate: 10          # Posts per page on the blog index
+paginate: 5          # Posts per page on the blog index
 pagination_dir: blog  # Directory base for pagination URLs eg. /blog/page/2/
 recent_posts: 5       # Posts in the sidebar Recent Posts section
 excerpt_link: "Read on &rarr;"  # "Continue reading" link text at the bottom of excerpted articles
@@ -61,6 +61,11 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 #   3rd Party Settings    #
 # ----------------------- #
+banner: false
+
+# addthis
+addthis_button: true
+addthis_profile_id: ra-52599cc044d135f3
 
 # Github repositories
 github_user: zziuni
@@ -71,6 +76,8 @@ github_skip_forks: true
 # Twitter
 twitter_user: zziuni
 twitter_tweet_button: true
+twitter_tweet_count: 0
+twitter_show_replies: true
 
 # Google +1
 google_plus_one: false
@@ -98,3 +105,4 @@ google_analytics_tracking_id: UA-44802186-1
 
 # Facebook Like
 facebook_like: true
+facebook_user: zziuni

@@ -21,7 +21,7 @@ Grunt -.4.x는 Node.js 버전이 `>=0.8.0` 이여야 한다.
 
 **Grunt 0.3에서 업그레이드 하는 거라면, [Grunt 0.3 Notes](http://gruntjs.com/getting-started#grunt-0.3-notes)를 봐라.**
 
-Grunt를 사용하려면 먼저 Grunt's Command line interface (CLI)를 설치해야 한다. OSX나 nix, BSD에서는 sodo가, 윈도우즈에서는 administrator 권한이 필요할 수도 있다.
+Grunt를 사용하려면 먼저 Grunt's Command line interface (CLI)를 설치해야 한다. OSX나 nix, BSD에서는 sudo가, 윈도우즈에서는 administrator 권한이 필요할 수도 있다.
 
     npm install -g grunt-cli
 
@@ -32,17 +32,17 @@ Grunt를 사용하려면 먼저 Grunt's Command line interface (CLI)를 설치�
 주의할 점은 `grunt-cli`는 Grunt task runner를 설치하지 않는다는 것이다. Grunt CLI의 역활은 간단하다. `Gruntflie`이 있는 곳에 설치된 버전의 Grunt를 실행하는 것이다. 즉, 같은 장비에서 여러 버전의 Grunt를 설치할 수 있다.
 
 ## How the CLI works
-`grunt`실행할 때 마다 node의 `require()`를 사용해서 프로젝트 로컬의 grunt를 실행함. 그러므로 프로텍트 하위 폴더 어디서든 `grunt`를 실행할 수 있다.
+`grunt`실행할 때 마다 node의 `require()`를 사용해서 프로젝트 로컬의 grunt를 실행한다. 그러므로 프로텍트 하위 폴더 어디서든 `grunt`를 실행할 수 있다.
 
-로컬에 인스톨된 Grunt를 찾으면 CLI는 Grunt 라이브러리의 로컬 인스톨본을 불러온다. 이때 `Gruntfile`의 환경설정을 적용하고, 동작하기 위해서 설정한 task들을 실행한다.
+로컬에 인스톨된 Grunt를 찾으면 CLI는 Grunt 라이브러리의 로컬 인스톨본을 불러온다. 이때 `Gruntfile`의 환경설정을 적용하고, 동작시키려고 설정한 task들을 실행한다.
 
-무슨일이 일어나느지 궁금하면 [코드](https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt)를 읽어보자. 겁나 짧다.
+무슨일이 일어나는지 궁금하면 [코드](https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt)를 읽어보자. 겁나 짧다.
 
 ## Preparing a new grunt project
 
 특별히 설정을 하지 않은 셋업은 프로젝트에 두 개의 파일을 추가한다. `package.json`과 `Grunfile`이다.
 
-**package.json**: 이 파일은 [npm](https://npmjs.org/)이 npm 모듈로 해당 프로젝트를 출판할때 사용할 메타데이터 저장을 위해 사용된다. 이 파일의 [devDependencies](https://npmjs.org/doc/json.html#devDependencies)에 여러분의 프로젝트에 필요한 grunt와 Grunt 플러그인들을 나열할 수 있다.
+**package.json**: 이 파일은 [npm](https://npmjs.org/)이 npm 모듈로 해당 프로젝트를 출판할 때 사용할 메타데이터 저장을 위해 사용된다. 이 파일의 [devDependencies](https://npmjs.org/doc/json.html#devDependencies)에 여러분의 프로젝트에 필요한 grunt와 Grunt 플러그인들을 나열할 수 있다.
 
 **Gruntfile**: 이 파일의 이름은 `Grunffile.js`이거나 `Grunffile.coffee`이다. task를 설정하거나 정의하고 Grunt 플러그인을 불러오는데 사용한다.
 

@@ -34,11 +34,22 @@
 	appendCaption(); // Delete or comment this line to disable caption
 
 	var mobilenav = $('#mobile-nav');
+	var mainnav = $("#main-nav");
 
 	$('html').click(function(){
 		mobilenav.find('.on').each(function(){
 			$(this).removeClass('on').next().hide();
 		});
+	});
+
+	mainnav.on('click', '.main .menu-cate', function(){
+		console.log($(this));
+		var cateList = $(".cate-list").find("ul");
+		if( !cateList.hasClass('on') ){
+			cateList.addClass('on');
+		}else{
+			cateList.removeClass('on');
+		}
 	});
 
 	mobilenav.on('click', '.menu .button', function(){

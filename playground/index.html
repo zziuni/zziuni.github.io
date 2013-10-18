@@ -17,63 +17,74 @@
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	
+	<script src="/javascripts/jquery.toc.js"></script>
+<script src="/javascripts/main.js"></script>
 </head>
 
 
 <body>
-	<header id="header" class="inner"><h1><a href="/">zziuni's Blog</a></h1>
-<nav id="main-nav"><ul class="main">
+	<header id="header" class="inner"><div id="main-header">
+	<h1><a href="/">zziuni's Blog</a></h1>
+	<nav id="main-nav"><ul class="main">
 	<li><a href="/">Blog</a></li>
 	<li><a href="/blog/archives">Archives</a></li>
-</ul>
-</nav>
-<nav id="mobile-nav">
-	<div class="alignleft menu">
-		<a class="button">Menu</a>
-		<div class="container"><ul class="main">
+            <li class="menu-cate"><a href="#">Category</a>
+                <ul><li><a href='/blog/categories/amd'>AMD (1)</a></li><li><a href='/blog/categories/chrome'>Chrome (1)</a></li><li><a href='/blog/categories/devtool'>DevTool (1)</a></li><li><a href='/blog/categories/grunt'>Grunt (1)</a></li><li><a href='/blog/categories/javascript'>Javascript (2)</a></li><li><a href='/blog/categories/requirejs'>RequireJS (1)</a></li><li><a href='/blog/categories/translate'>Translate (3)</a></li></ul>
+            </li>
+</ul></nav>
+	<nav id="mobile-nav">
+		<div class="alignleft menu">
+			<a class="button">Menu</a>
+			<div class="container"><ul class="main">
 	<li><a href="/">Blog</a></li>
 	<li><a href="/blog/archives">Archives</a></li>
-</ul>
-</div>
-	</div>
-	<div class="alignright search">
-		<a class="button"></a>
-		<div class="container">
-			<form action="http://google.com/search" method="get">
-				<input type="text" name="q" results="0">
-				<input type="hidden" name="q" value="site:zziuni.github.io">
-			</form>
+            <li class="menu-cate"><a href="#">Category</a>
+                <ul><li><a href='/blog/categories/amd'>AMD (1)</a></li><li><a href='/blog/categories/chrome'>Chrome (1)</a></li><li><a href='/blog/categories/devtool'>DevTool (1)</a></li><li><a href='/blog/categories/grunt'>Grunt (1)</a></li><li><a href='/blog/categories/javascript'>Javascript (2)</a></li><li><a href='/blog/categories/requirejs'>RequireJS (1)</a></li><li><a href='/blog/categories/translate'>Translate (3)</a></li></ul>
+            </li>
+</ul></div>
 		</div>
-	</div>
-</nav>
-<nav id="sub-nav" class="alignright">
-	<div class="social">
-		
-		<a class="facebook" href="http://www.facebook.com/zziuni" title="Facebook">Facebook</a>
-		
-		
-		
-		<a class="twitter" href="http://twitter.com/zziuni" title="Twitter">Twitter</a>
-		
-		
-		<a class="github" href="https://github.com/zziuni" title="GitHub">GitHub</a>
-		
-    
-		
-		
-		
-		
-		
-		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
-		
-    
-	</div>
-	<form class="search" action="http://google.com/search" method="get">
-		<input class="alignright" type="text" name="q" results="0">
-		<input type="hidden" name="q" value="site:zziuni.github.io">
-	</form>
-</nav>
+		<div class="alignright search">
+			<a class="button"></a>
+			<div class="container">
+				<form action="http://google.com/search" method="get">
+					<input type="text" name="q" results="0">
+					<input type="hidden" name="q" value="site:zziuni.github.io">
+				</form>
+			</div>
+		</div>
+	</nav>
+	<nav id="sub-nav" class="alignright">
+		<div class="social">
+			
+			<a class="facebook" href="http://www.facebook.com/zziuni" title="Facebook">Facebook</a>
+			
+			
+			
+			<a class="twitter" href="http://twitter.com/zziuni" title="Twitter">Twitter</a>
+			
+			
+			<a class="github" href="https://github.com/zziuni" title="GitHub">GitHub</a>
+			
+	    
+			
+			
+			
+			
+			
+			<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+			
+	    
+		</div>
+		<form class="search" action="http://google.com/search" method="get">
+			<input class="alignright" type="text" name="q" results="0">
+			<input type="hidden" name="q" value="site:zziuni.github.io">
+		</form>
+	</nav>
+</div>
+<div class="cate-list">
+    <ul></ul>
+</div>
+
 
 </header>
 	
@@ -239,6 +250,15 @@
 	</script>
 
 
-
+<script>
+(function($){
+    // $(".toc").toc({
+    //     "selectors": "h1, h2",
+    //     "container": "#content .entry-content",
+    //     "smoothScrolling": true,
+    //     "prefix": "toc"
+    // });
+})(jQuery);
+</script>
 </body>
 </html>

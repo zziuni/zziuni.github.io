@@ -3,7 +3,7 @@ layout: post
 title: "Build a simple client-side MVC app with RequireJS in korean"
 date: 2013-10-12 21:48
 comments: true
-categories: [javascript, RequireJS, AMD]
+categories: [Javascript, RequireJS, AMD, Translate]
 ---
 
 > 이 글은 @verekia 씨가 작성한 [Build a simple client-side MVC app with RequireJS](http://verekia.com/requirejs/build-simple-client-side-mvc-app-require-js)를 허락을 받아 번역한 글입니다.

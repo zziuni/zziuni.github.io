@@ -3,7 +3,7 @@ layout: post
 title: "Chrome DevTools Revolutions 2013 in korea"
 date: 2013-10-12 23:59
 comments: true
-categories: [DevTool, Chrome]
+categories: [DevTool, Chrome, Translate]
 ---
 
 >이 글은 HTML5Rocks의 [Chrome DevTools Revolutions 2013](http://www.html5rocks.com/en/tutorials/developertools/revolutions2013/#toc-canvas-profiling)을 번역한 글입니다.

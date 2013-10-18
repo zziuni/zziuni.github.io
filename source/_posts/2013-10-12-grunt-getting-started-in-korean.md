@@ -3,7 +3,7 @@ layout: post
 title: "Grunt:Getting Started in korean"
 date: 2013-10-13 00:01
 comments: true
-categories: [Grunt, Javascript]
+categories: [Grunt, Javascript, Translate]
 banner: false
 ---
 

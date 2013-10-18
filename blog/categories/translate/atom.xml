@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Translate | zziuni's Blog]]></title>
   <link href="http://zziuni.github.io/blog/categories/translate/atom.xml" rel="self"/>
   <link href="http://zziuni.github.io/"/>
-  <updated>2013-10-18T13:45:45+09:00</updated>
+  <updated>2013-10-18T15:48:37+09:00</updated>
   <id>http://zziuni.github.io/</id>
   <author>
     <name><![CDATA[zziuni]]></name>
@@ -32,7 +32,7 @@
 
 <p><strong>Grunt 0.3에서 업그레이드 하는 거라면, <a href="http://gruntjs.com/getting-started#grunt-0.3-notes">Grunt 0.3 Notes</a>를 봐라.</strong></p>
 
-<p>Grunt를 사용하려면 먼저 Grunt&rsquo;s Command line interface (CLI)를 설치해야 한다. OSX나 nix, BSD에서는 sodo가, 윈도우즈에서는 administrator 권한이 필요할 수도 있다.</p>
+<p>Grunt를 사용하려면 먼저 Grunt&rsquo;s Command line interface (CLI)를 설치해야 한다. OSX나 nix, BSD에서는 sudo가, 윈도우즈에서는 administrator 권한이 필요할 수도 있다.</p>
 
 <pre><code>npm install -g grunt-cli
 </code></pre>
@@ -46,17 +46,17 @@
 
 <h2>How the CLI works</h2>
 
-<p><code>grunt</code>실행할 때 마다 node의 <code>require()</code>를 사용해서 프로젝트 로컬의 grunt를 실행함. 그러므로 프로텍트 하위 폴더 어디서든 <code>grunt</code>를 실행할 수 있다.</p>
+<p><code>grunt</code>실행할 때 마다 node의 <code>require()</code>를 사용해서 프로젝트 로컬의 grunt를 실행한다. 그러므로 프로텍트 하위 폴더 어디서든 <code>grunt</code>를 실행할 수 있다.</p>
 
-<p>로컬에 인스톨된 Grunt를 찾으면 CLI는 Grunt 라이브러리의 로컬 인스톨본을 불러온다. 이때 <code>Gruntfile</code>의 환경설정을 적용하고, 동작하기 위해서 설정한 task들을 실행한다.</p>
+<p>로컬에 인스톨된 Grunt를 찾으면 CLI는 Grunt 라이브러리의 로컬 인스톨본을 불러온다. 이때 <code>Gruntfile</code>의 환경설정을 적용하고, 동작시키려고 설정한 task들을 실행한다.</p>
 
-<p>무슨일이 일어나느지 궁금하면 <a href="https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt">코드</a>를 읽어보자. 겁나 짧다.</p>
+<p>무슨일이 일어나는지 궁금하면 <a href="https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt">코드</a>를 읽어보자. 겁나 짧다.</p>
 
 <h2>Preparing a new grunt project</h2>
 
 <p>특별히 설정을 하지 않은 셋업은 프로젝트에 두 개의 파일을 추가한다. <code>package.json</code>과 <code>Grunfile</code>이다.</p>
 
-<p><strong>package.json</strong>: 이 파일은 <a href="https://npmjs.org/">npm</a>이 npm 모듈로 해당 프로젝트를 출판할때 사용할 메타데이터 저장을 위해 사용된다. 이 파일의 <a href="https://npmjs.org/doc/json.html#devDependencies">devDependencies</a>에 여러분의 프로젝트에 필요한 grunt와 Grunt 플러그인들을 나열할 수 있다.</p>
+<p><strong>package.json</strong>: 이 파일은 <a href="https://npmjs.org/">npm</a>이 npm 모듈로 해당 프로젝트를 출판할 때 사용할 메타데이터 저장을 위해 사용된다. 이 파일의 <a href="https://npmjs.org/doc/json.html#devDependencies">devDependencies</a>에 여러분의 프로젝트에 필요한 grunt와 Grunt 플러그인들을 나열할 수 있다.</p>
 
 <p><strong>Gruntfile</strong>: 이 파일의 이름은 <code>Grunffile.js</code>이거나 <code>Grunffile.coffee</code>이다. task를 설정하거나 정의하고 Grunt 플러그인을 불러오는데 사용한다.</p>
 
@@ -260,10 +260,10 @@ grunt.registerTask('default', ['uglify']);
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Chrome DevTools Revolutions 2013 in korea]]></title>
-    <link href="http://zziuni.github.io/blog/2013/10/12/chrome-devtools-revolutions-2013-in-korea/"/>
+    <title type="html"><![CDATA[Chrome DevTools Revolutions 2013 in korean]]></title>
+    <link href="http://zziuni.github.io/blog/2013/10/12/chrome-devtools-revolutions-2013-in-korean/"/>
     <updated>2013-10-12T23:59:00+09:00</updated>
-    <id>http://zziuni.github.io/blog/2013/10/12/chrome-devtools-revolutions-2013-in-korea</id>
+    <id>http://zziuni.github.io/blog/2013/10/12/chrome-devtools-revolutions-2013-in-korean</id>
     <content type="html"><![CDATA[<blockquote><p>이 글은 HTML5Rocks의 <a href="http://www.html5rocks.com/en/tutorials/developertools/revolutions2013/#toc-canvas-profiling">Chrome DevTools Revolutions 2013</a>을 번역한 글입니다.</p></blockquote>
 
 <h2>Introduction <a href="" id="introduction">#</a></h2>

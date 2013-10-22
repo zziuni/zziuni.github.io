@@ -13,7 +13,7 @@ banner: false
 ![](http://gruntjs.com/img/grunt-logo.svg)
 # Getting started
 
-Grunt와 Grunt 플러그인은 [npm]()으로 설치하고 관리된다. npm은 [Node.js]()의 페키지 메니저 도구다.
+Grunt와 Grunt 플러그인은 [npm]()으로 설치하고 관리된다. npm은 [Node.js]()의 패키지 메니저 도구다.
 
 Grunt -.4.x는 Node.js 버전이 `>=0.8.0` 이여야 한다.
 
@@ -29,14 +29,14 @@ Grunt를 사용하려면 먼저 Grunt's Command line interface (CLI)를 설치�
 
 <!-- more -->
 
-주의할 점은 `grunt-cli`는 Grunt task runner를 설치하지 않는다는 것이다. Grunt CLI의 역활은 간단하다. `Gruntflie`이 있는 곳에 설치된 버전의 Grunt를 실행하는 것이다. 즉, 같은 장비에서 여러 버전의 Grunt를 설치할 수 있다.
+주의할 점은 `grunt-cli`는 Grunt task runner를 설치하지 않는다는 것이다. Grunt CLI의 역할은 간단하다. `Gruntflie`이 있는 곳에 설치된 버전의 Grunt를 실행하는 것이다. 즉, 같은 장비에서 여러 버전의 Grunt를 설치할 수 있다.
 
 ## How the CLI works
-`grunt`실행할 때 마다 node의 `require()`를 사용해서 프로젝트 로컬의 grunt를 실행한다. 그러므로 프로텍트 하위 폴더 어디서든 `grunt`를 실행할 수 있다.
+`grunt`실행할 때마다 node의 `require()`를 사용해서 프로젝트 로컬의 grunt를 실행한다. 그러므로 프로젝트 하위 폴더 어디서든 `grunt`를 실행할 수 있다.
 
 로컬에 인스톨된 Grunt를 찾으면 CLI는 Grunt 라이브러리의 로컬 인스톨본을 불러온다. 이때 `Gruntfile`의 환경설정을 적용하고, 동작시키려고 설정한 task들을 실행한다.
 
-무슨일이 일어나는지 궁금하면 [코드](https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt)를 읽어보자. 겁나 짧다.
+무슨 일이 일어나는지 궁금하면 [코드](https://github.com/gruntjs/grunt-cli/blob/master/bin/grunt)를 읽어보자. 겁나 짧다.
 
 ## Preparing a new grunt project
 
@@ -44,17 +44,17 @@ Grunt를 사용하려면 먼저 Grunt's Command line interface (CLI)를 설치�
 
 **package.json**: 이 파일은 [npm](https://npmjs.org/)이 npm 모듈로 해당 프로젝트를 출판할 때 사용할 메타데이터 저장을 위해 사용된다. 이 파일의 [devDependencies](https://npmjs.org/doc/json.html#devDependencies)에 여러분의 프로젝트에 필요한 grunt와 Grunt 플러그인들을 나열할 수 있다.
 
-**Gruntfile**: 이 파일의 이름은 `Grunffile.js`이거나 `Grunffile.coffee`이다. task를 설정하거나 정의하고 Grunt 플러그인을 불러오는데 사용한다.
+**Gruntfile**: 이 파일의 이름은 `Gruntfile.js`이거나 `Gruntfile.coffee`이다. task를 설정하거나 정의하고 Grunt 플러그인을 불러오는데 사용한다.
 
 ### package.json
 
-`package.json`파일은 `Gruntfile`과 함께 프로젝트 루트 디렉토리에 있어야 하고, 프로텍트 소스에 속해야 한다. `package.json`이 있는 폴더에서 `npm install`를 실행하면 파일안에 dependency 목록의 최신 버전을 인스톨한다.
+`package.json`파일은 `Gruntfile`과 함께 프로젝트 루트 디렉토리에 있어야 하고, 프로트 소스에 속해야 한다. `package.json`이 있는 폴더에서 `npm install`를 실행하면 파일안에 dependency 목록의 최신 버전을 인스톨한다.
 
 프로젝트에 `package.json`를 추가하는 방법은 여러가지가 있다.
 
 * 대부분의 [grunt-init](http://gruntjs.com/project-scaffolding#h5o-9) 템플릿은 자동으로 프로젝트 전용  `package.json`파일을 생성한다.
 * [npm init] 컴맨드 명령어는 기본 `package.json`을 생성한다.
-* 다음 예제를 참고해서 필요한 부분은 [specification](https://npmjs.org/doc/json.html)을 참고해서 확장한다.
+* 다음 예제를 참고 해서 필요한 부분은 [specification](https://npmjs.org/doc/json.html)을 참고 해서 확장한다.
 
 ```javascript
     {
@@ -82,7 +82,7 @@ grunt 프러그인과 다른 node 모듈도 마찬가지다. 이렇게 설치하
 
 ### The Gruntfile
 
-`Gruntfile.js`나 `Grunffile.coffee`파일은 프로젝트 루트 폴더에 있어야 하는 자바스크립트 혹은, 커피스크립트 파일이다. 프로젝트 소스의 일부어야 한다.
+`Gruntfile.js`나 `Gruntfile.coffee`파일은 프로젝트 루트 폴더에 있어야 하는 자바스크립트 혹은, 커피스크립트 파일이다. 그리고 프로젝트 소스의 일부여야 한다.
 
 `Gruntfile`은 다음 부분들로 구성되어 있다.
 
@@ -94,7 +94,7 @@ grunt 프러그인과 다른 node 모듈도 마찬가지다. 이렇게 설치하
 
 #### An sample Gruntfile
 
-다음 `Grunffile`은 `package.json` 파일에서 프로젝트의 메타데이터를 Grunt config로 인포트 하고, [grunt-contrib-uglify]()플러그인의 `uglify` 타스크를 소스코드를 minify하기 위해서 설정했다. 그리고 메타데이터를 이용해서 동적인 베너 주석을 생성한다. 컴맨드 라인에 `grunt` 명령어를 실행하면 기본값으로 `uglify` 타스크가 실행된다.
+다음 `Gruntfile`은 `package.json` 파일에서 프로젝트의 메타데이터를 Grunt config로 인포트 하고, [grunt-contrib-uglify]()플러그인의 `uglify` task를 소스코드를 minify하기 위해서 설정했다. 그리고 메타데이터를 이용해서 동적인 베너 주석을 생성한다. 컴맨드 라인에 `grunt` 명령어를 실행하면 기본값으로 `uglify` task가 실행된다.
 
 ```javascript
     module.exports = function(grunt) {
@@ -138,11 +138,11 @@ grunt 프러그인과 다른 node 모듈도 마찬가지다. 이렇게 설치하
 
 대부분의 Grunt task는 [grunt.initConfig](http://gruntjs.com/grunt#grunt.initconfig) 메서드에서 인자로 전달된 객체의 configuraton 데이터를 참조한다.
 
-위의 예제에서, `grunt.file.readJSON('package.json')` 코드는 grunt config로 `package.json`에 저장된 JOSN 메타데이터를 인포트한다. 그러면 `<% %>` 템플릿 문사열이 config의 모든 프로퍼티를 참조할 수 있다. 파일패스나 파일 목록 같은 configuration 데이터는 반복을 줄이기 위해서 이 방법으로 지정한다.
+위의 예제에서, `grunt.file.readJSON('package.json')` 코드는 grunt config로 `package.json`에 저장된 JOSN 메타데이터를 인포트한다. 그러면 `<% %>` 템플릿 문자열이 config의 모든 프로퍼티를 참조할 수 있다. 파일패스나 파일 목록 같은 configuration 데이터는 반복을 줄이기 위해서 이 방법으로 지정한다.
 
-configuraton 객체안에 임의의 객체를 저장한다면, 여러분의 task가 요청하는 프로퍼티와 충돌하지 않는이상, 무시된다. 그리고 이 파일은 단순 JSON이 아니라 자바스크립트 파일이므로, 유효한 JS코드는 모두 사용가능하다. 필요하면 configuration을 프로그래밍적으로 생성할 수도 있다. ㅌ
+configuraton 객체안에 임의의 객체를 저장한다면, 여러분의 task가 요청하는 프로퍼티와 충돌하지 않는이상, 무시된다. 그리고 이 파일은 단순 JSON이 아니라 자바스크립트 파일이므로, 유효한 JS코드는 모두 사용가능하다. 필요하면 configuration을 프로그래밍적으로 생성할 수도 있다.
 
-다른 task도 마찬가지지만, [grunt-contrib-uglify](http://github.com/gruntjs/grunt-contrib-uglify) 플러그인의 `uglify` task는 configuration을 통해서 같은 이름의 프로퍼티에 설정할 값이 들어오길 기대한다. 여기서는 `banner` 옵션을 지정했다. 그리고 소스파일(src) 하나를 타겟파일(dest) 하나로 미니파이(minify)하는 어그리파이(uglify) 타켓명인 `build`를 지정했다.
+다른 task도 마찬가지지만, [grunt-contrib-uglify](http://github.com/gruntjs/grunt-contrib-uglify) 플러그인의 `uglify` task는 configuration을 통해서 같은 이름의 프로퍼티에 설정할 값이 들어오길 기대한다. 여기서는 `banner` 옵션을 지정했다. 그리고 소스파일(src) 하나를 타겟파일(dest) 하나로 미니파이(minify)하는 어그리파이(uglify) 타명인 `build`를 지정했다.
 
 ```javascript
     // Project configuration.
@@ -173,7 +173,7 @@ configuraton 객체안에 임의의 객체를 저장한다면, 여러분의 task
 
 #### Custom tasks
 
-`default` task를 설정하면 기본으로 실행할 task를 하나이상 지정할 수 있다. 예를 들면, 컴맨드 라인에 특정 task를 지정하지 않고 `grunt`를 입력하면 `uglify` task가 실행된다. 이는 실제로는 `grunt uglify`나 `grunt default`와 같다. 배열안에는 여러 task를 지정할 수 있다. (아규먼트는 있을 수도 있고 없을 수도 있다.)
+`default` task를 설정하면 기본으로 실행할 task를 하나 이상 지정할 수 있다. 예를 들면, 컴맨드 라인에 특정 task를 지정하지 않고 `grunt`를 입력하면 `uglify` task가 실행된다. 이는 실제로는 `grunt uglify`나 `grunt default`와 같다. 배열 안에는 여러 task를 지정할 수 있다. (아규먼트는 있을 수도 있고 없을 수도 있다.)
 
 ```javascript
     // Default task(s)

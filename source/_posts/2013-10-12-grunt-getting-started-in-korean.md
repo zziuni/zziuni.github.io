@@ -9,8 +9,9 @@ categories: [Grunt, Javascript, Translate]
 
 >[Grunt](http://gruntjs.com)은 Javascript Task Runner 입니다. 이 문서는 Grunt 공식 사이트의 [Getting Started](http://gruntjs.com/getting-started)를 번역한 문서이며 grunt-cli의 버전이 0.1.7일 때 번역했습니다.
 
+# Getting Started
+
 ![](http://gruntjs.com/img/grunt-logo.svg)
-# Getting started
 
 Grunt와 Grunt 플러그인의 설치와 관리는 [npm](https://npmjs.org)을 통해서 한다. npm은 [Node.js](http://nodejs.org)의 패키지 메니징 도구다.
 

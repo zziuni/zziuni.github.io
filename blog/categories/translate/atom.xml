@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Translate | zziuni's Blog]]></title>
   <link href="http://zziuni.github.io/blog/categories/translate/atom.xml" rel="self"/>
   <link href="http://zziuni.github.io/"/>
-  <updated>2013-11-18T09:13:15+09:00</updated>
+  <updated>2013-11-26T00:56:13+09:00</updated>
   <id>http://zziuni.github.io/</id>
   <author>
     <name><![CDATA[zziuni]]></name>
@@ -14,13 +14,247 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Grunt:Configuring tasks in korean]]></title>
+    <title type="html"><![CDATA[Grunt: sample gruntfile in korean]]></title>
+    <link href="http://zziuni.github.io/blog/2013/11/26/grunt-sample-gruntfile-in-korean/"/>
+    <updated>2013-11-26T00:31:00+09:00</updated>
+    <id>http://zziuni.github.io/blog/2013/11/26/grunt-sample-gruntfile-in-korean</id>
+    <content type="html"><![CDATA[<blockquote><p><a href="http://gruntjs.com">Grunt</a>은 Javascript Task Runner 입니다.. 이 문서는 Grunt 공식 사이트의 <a href="http://gruntjs.com/sample-gruntfile">Sample Gruntfile</a>를 번역한 문서이며 grunt-cli의 버전이 0.1.11일 때 번역했습니다.</p></blockquote>
+
+<h1>Sample Gruntfile</h1>
+
+<p>다음 다섯 개의 Grunt 플러그인을 사용하는 <code>Gruntfile</code> 샘플을 살펴보겠다.</p>
+
+<ul>
+<li><a href="https://github.com/gruntjs/grunt-contrib-uglify">grunt-contrib-uglify</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-qunit">grunt-contrib-qunit</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-concat">grunt-contrib-concat</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-jshint">grunt-contrib-jshint</a></li>
+<li><a href="https://github.com/gruntjs/grunt-contrib-watch">grunt-contrib-watch</a></li>
+</ul>
+
+
+<!-- more -->
+
+
+<p>전체 <code>Gruntfile</code>은 이 페이지 가장 아래에 제공하지만, 순서대로 읽어야 단계별로 이해할 수 있다.</p>
+
+<p>첫 부분은 Grunt 환경성정을 캡슐화하는 &ldquo;wrapper&rdquo; 함수다.</p>
+
+<p><code>javascript
+module.exports = function(grunt){
+}
+</code></p>
+
+<p>이 함수안에서 환경설정 객체를 생성할 수 있다.</p>
+
+<p><code>javascript
+grunt.initConfig({
+});
+</code></p>
+
+<p>다음은 <code>pkg</code>프로퍼티에 <code>package.json</code>파일의 프로젝트 설정을 읽어서 설정한다. 이를 통해서 <code>package.json</code> 파일의 프로퍼티 값들을 참조할 수 있다. 조금만 더 읽으면 볼 수 있다.</p>
+
+<p><code>javascript
+pkg: grunt.file.readJSON("package.json");
+</code></p>
+
+<p>여기까지 본 것을 합치면 이렇게 된다.</p>
+
+<p>```javascript
+module.exports = function(grunt) {
+  grunt.initConfig({</p>
+
+<pre><code>pkg: grunt.file.readJSON('package.json')
+</code></pre>
+
+<p>  });
+};
+```</p>
+
+<p>이제, task 별 환경설정을 정의할 수 있다. task를 위한 환경설정 객체는 전체 환경설정 객체에서 task 명과 동일한 이름의 프로퍼티로 존재한다. 즉, &ldquo;concat&rdquo; task는 환경설정 객체의 &ldquo;concat&rdquo; 프로퍼티에 있다. 다음은 &ldquo;concat"을 위한 task 환경설정 객체의 예제다.</p>
+
+<p>```javascript
+concat: {
+  options: {</p>
+
+<pre><code>// 합친 결과 파일에서 각 파일을 구분할 문자열을 정의한다. 
+separator: ';'
+</code></pre>
+
+<p>  },
+  dist: {</p>
+
+<pre><code>// 합칠 파일들.
+src: ['src/**/*.js'],
+// 결과 js 파일의 위치
+dest: 'dist/&lt;%= pkg.name %&gt;.js'
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p><code>package.json</code>의 <code>name</code> 프로퍼티를 어떻게 참조했는지 보이는가? 우리는 <code>package.json</code>을 불러온 결과가 들어있는 <code>pkg</code> 프로퍼티를 통해서 <code>pkg.name</code>로 접근했다. 이 값은 이미 자바스크립트 객체로 파싱되어있다. Grunt는 환경설정 객체의 프로퍼티 값을 뱉어내는 탬플릿 엔진을 가지고 있다. 여기서는 <code>src/</code> 폴더에서 확장자가 <code>.js</code>인 파일 전부를 합치는 concat task를 설정했다.</p>
+
+<p>이번에는 자바스크립트를 minify(공백을 제거하고 변수명을 짧은 이름으로 바꾸는 작업)하는 uglify 플러그인을 설정해보자.</p>
+
+<p>```javascript
+uglify: {
+  options: {</p>
+
+<pre><code>// 결과 파일 상단에 주석을 넣는다. 
+banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("dd-mm-yyyy") %&gt; */\n'
+</code></pre>
+
+<p>  },
+  dist: {</p>
+
+<pre><code>files: {
+  'dist/&lt;%= pkg.name %&gt;.min.js': ['&lt;%= concat.dist.dest %&gt;']
+}
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>이제 uglify task는 minify한 자바스크립트 파일을 <code>dist/</code>에 생성한다. 여기서는 concat task에서 생성한 파일을 사용해서 minify를 진행하기 위해서 <code>&lt;%= concat.dis.dest %&gt;</code>를 사용했다.</p>
+
+<p>QUnit 플러그인은 설정이 정말 간단한다. 그냥 QUnit을 실행하는 HTML 실행 파일(test runner)이 있는 위치만 지정하면 된다.</p>
+
+<p><code>javascript
+qunit: {
+  files: ['test/**/*.html']
+},
+</code></p>
+
+<p>JSHint 플러그인도 정말 간단한다.</p>
+
+<p>```javascript
+jshint: {
+  // 검사를 실행할 파일을 지정한다.
+  files: [&lsquo;gruntfile.js&rsquo;, &lsquo;src/<strong>/*.js&rsquo;, &lsquo;test/</strong>/*.js&rsquo;],
+  // JSHint 환경설정 (<a href="http://www.jshint.com/docs/">http://www.jshint.com/docs/</a> 참고)
+  options: {</p>
+
+<pre><code>// 바꾸고 싶은 JSHint 기본값을 여기 지정한다. 
+globals: {
+  jQuery: true,
+  console: true,
+  module: true
+}
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>JSHint도 파일 목록이 담긴 배열과 옵션 객체만 설정하면 된다. JSHint에 대한 정보는 <a href="http://www.jshint.com/docs/">사이트</a>를 참고한다. JSHint를 기본값으로 잘 써왔다면, Gruntfile에서 재정의 할 필요없다.</p>
+
+<p>끝으로 watch 플러그인을 보자.</p>
+
+<p><code>javascript
+watch: {
+  files: ['&lt;%= jshint.files %&gt;'],
+  tasks: ['jshint', 'qunit']
+}
+</code></p>
+
+<p>이 task는 컴멘드 라인에 <code>grunt watch</code>를 입력해서 실행할 수 있다. 그러면, 설정한 파일에 어떤 변화가 감지될 때, 지정한 task들을 순서대로 실행한다. (여기서는 JSHint 확인을 위해서 같은 대상파일을 사용했다.)</p>
+
+<p>이제, 필요한 Grunt 플러그인을 불러와야 하는데, 이들은 사전에 npm을 통해서 설치되어있어야 한다.</p>
+
+<p><code>javascript
+grunt.loadNpmTasks('grunt-contrib-uglify');
+grunt.loadNpmTasks('grunt-contrib-jshint');
+grunt.loadNpmTasks('grunt-contrib-qunit');
+grunt.loadNpmTasks('grunt-contrib-watch');
+grunt.loadNpmTasks('grunt-contrib-concat');
+</code></p>
+
+<p>그리고 나서 task를 몇 개 설정한다. 가장 중요한건 default task다.</p>
+
+<p>```javascript
+// 컴멘드 라인에 &ldquo;grunt test"를 입력하면 실행된다.
+grunt.registerTask(&lsquo;test&rsquo;, [&lsquo;jshint&rsquo;, &lsquo;qunit&rsquo;]);</p>
+
+<p>// default task는 컴멘드 라인에 &ldquo;grunt"만 입력했을 때 실행할 task들이다.
+grunt.registerTask(&lsquo;default&rsquo;, [&lsquo;jshint&rsquo;, &lsquo;qunit&rsquo;, &lsquo;concat&rsquo;, &lsquo;uglify&rsquo;]);
+```</p>
+
+<p>전체 <code>Gruntfile.js</code>다.</p>
+
+<p>```javascript
+module.exports = function(grunt) {</p>
+
+<p>  grunt.initConfig({</p>
+
+<pre><code>pkg: grunt.file.readJSON('package.json'),
+concat: {
+  options: {
+    separator: ';'
+  },
+  dist: {
+    src: ['src/**/*.js'],
+    dest: 'dist/&lt;%= pkg.name %&gt;.js'
+  }
+},
+uglify: {
+  options: {
+    banner: '/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today("dd-mm-yyyy") %&gt; */\n'
+  },
+  dist: {
+    files: {
+      'dist/&lt;%= pkg.name %&gt;.min.js': ['&lt;%= concat.dist.dest %&gt;']
+    }
+  }
+},
+qunit: {
+  files: ['test/**/*.html']
+},
+jshint: {
+  files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+  options: {
+    // options here to override JSHint defaults
+    globals: {
+      jQuery: true,
+      console: true,
+      module: true,
+      document: true
+    }
+  }
+},
+watch: {
+  files: ['&lt;%= jshint.files %&gt;'],
+  tasks: ['jshint', 'qunit']
+}
+</code></pre>
+
+<p>  });</p>
+
+<p>  grunt.loadNpmTasks(&lsquo;grunt-contrib-uglify&rsquo;);
+  grunt.loadNpmTasks(&lsquo;grunt-contrib-jshint&rsquo;);
+  grunt.loadNpmTasks(&lsquo;grunt-contrib-qunit&rsquo;);
+  grunt.loadNpmTasks(&lsquo;grunt-contrib-watch&rsquo;);
+  grunt.loadNpmTasks(&lsquo;grunt-contrib-concat&rsquo;);</p>
+
+<p>  grunt.registerTask(&lsquo;test&rsquo;, [&lsquo;jshint&rsquo;, &lsquo;qunit&rsquo;]);</p>
+
+<p>  grunt.registerTask(&lsquo;default&rsquo;, [&lsquo;jshint&rsquo;, &lsquo;qunit&rsquo;, &lsquo;concat&rsquo;, &lsquo;uglify&rsquo;]);</p>
+
+<p>};
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Grunt: Configuring tasks in korean]]></title>
     <link href="http://zziuni.github.io/blog/2013/11/17/grunt-configuring-tasks-in-korean/"/>
     <updated>2013-11-17T00:29:00+09:00</updated>
     <id>http://zziuni.github.io/blog/2013/11/17/grunt-configuring-tasks-in-korean</id>
-    <content type="html"><![CDATA[<blockquote><p><a href="http://gruntjs.com">Grunt</a>은 Javascript Task Runner 입니다. 이 문서는 Grunt 공식 사이트의 <a href="http://gruntjs.com/configuring-tasks">Configuring Tasks</a>를 번역한 문서이며 grunt-cli의 버전이 0.1.7일 때 번역했습니다.</p></blockquote>
+    <content type="html"><![CDATA[<blockquote><p><a href="http://gruntjs.com">Grunt</a>은 Javascript Task Runner 입니다. 이 문서는 Grunt 공식 사이트의 <a href="http://gruntjs.com/configuring-tasks">Configuring Tasks</a>를 번역한 문서이며 grunt-cli의 버전이 0.1.10일 때 번역했습니다.</p></blockquote>
 
-<h1>Configuring tasks</h1>
+<h1>Configuring Tasks</h1>
 
 <p>이 문서는 <code>Gruntfile</code>를 사용하는 프로젝트를 위해서 task 단위로 환경설정을 하는 법을 설명한다. <code>Gruntfile</code>에 대해 잘 모른다면 <a href="http://gruntjs.com/getting-started">Getting Started</a> (<a href="http://zziuni.github.io/blog/2013/10/13/grunt-getting-started-in-korean/">번역문</a>)문서를 먼저 읽어보고 <a href="http://gruntjs.com/sample-gruntfile">Gruntfile 샘플</a> 파일을 체크아웃 받자.</p>
 
@@ -427,9 +661,9 @@
     <id>http://zziuni.github.io/blog/2013/10/13/grunt-getting-started-in-korean</id>
     <content type="html"><![CDATA[<blockquote><p><a href="http://gruntjs.com">Grunt</a>은 Javascript Task Runner 입니다. 이 문서는 Grunt 공식 사이트의 <a href="http://gruntjs.com/getting-started">Getting Started</a>를 번역한 문서이며 grunt-cli의 버전이 0.1.7일 때 번역했습니다.</p></blockquote>
 
-<p><img src="http://gruntjs.com/img/grunt-logo.svg" alt="" /></p>
+<h1>Getting Started</h1>
 
-<h1>Getting started</h1>
+<p><img src="http://gruntjs.com/img/grunt-logo.svg" alt="" /></p>
 
 <p>Grunt와 Grunt 플러그인의 설치와 관리는 <a href="https://npmjs.org">npm</a>을 통해서 한다. npm은 <a href="http://nodejs.org">Node.js</a>의 패키지 메니징 도구다.</p>
 

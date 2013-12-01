@@ -8,7 +8,7 @@ categories: [Grunt, Javascript, Translate]
 
 >[Grunt](http://gruntjs.com)은 Javascript Task Runner 입니다. 이 문서는 Grunt 공식 사이트의 [Configuring Tasks](http://gruntjs.com/configuring-tasks)를 번역한 문서이며 grunt-cli의 버전이 0.1.10일 때 번역했습니다.
 
-# Configuring Tasks
+# Configuring tasks
 
 이 문서는 `Gruntfile`를 사용하는 프로젝트를 위해서 task 단위로 환경설정을 하는 법을 설명한다. `Gruntfile`에 대해 잘 모른다면 [Getting Started](http://gruntjs.com/getting-started) ([번역문](http://zziuni.github.io/blog/2013/10/13/grunt-getting-started-in-korean/))문서를 먼저 읽어보고 [Gruntfile 샘플](http://gruntjs.com/sample-gruntfile) 파일을 체크아웃 받자.
 

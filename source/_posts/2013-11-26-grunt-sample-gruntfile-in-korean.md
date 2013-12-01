@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Grunt: sample gruntfile in korean"
+title: "Grunt: Sample Gruntfile in korean"
 date: 2013-11-26 00:31
 comments: true
 categories: [Grunt, Javascript, Translate]
@@ -23,7 +23,7 @@ categories: [Grunt, Javascript, Translate]
 
 전체 `Gruntfile`은 이 페이지 가장 아래에 제공하지만, 순서대로 읽어야 단계별로 이해할 수 있다. 
 
-첫 부분은 Grunt 환경성정을 캡슐화하는 "wrapper" 함수다. 
+첫 부분은 Grunt 환경설정을 캡슐화하는 "wrapper" 함수다. 
 
 ```javascript
 module.exports = function(grunt){

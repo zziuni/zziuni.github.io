@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Grunt:Getting Started in korean"
+title: "Grunt: Getting started in korean"
 date: 2013-10-13 00:01
 comments: true
 categories: [Grunt, Javascript, Translate]
@@ -9,7 +9,7 @@ categories: [Grunt, Javascript, Translate]
 
 >[Grunt](http://gruntjs.com)은 Javascript Task Runner 입니다. 이 문서는 Grunt 공식 사이트의 [Getting Started](http://gruntjs.com/getting-started)를 번역한 문서이며 grunt-cli의 버전이 0.1.7일 때 번역했습니다.
 
-# Getting Started
+# Getting started
 
 ![](http://gruntjs.com/img/grunt-logo.svg)
 

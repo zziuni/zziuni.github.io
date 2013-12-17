@@ -7,7 +7,7 @@
 	<meta name="author" content="zziuni">
 
 	
-	<meta name="description" content="이 글은 @verekia 씨가 작성한 Build a simple client-side MVC app with RequireJS를 허락을 받아 번역한 글입니다. 웹 개발자라면 흔히 파일 하나로 자바스크립트 코드를 짜기 시작합니다. 그리고 그 코드가 점점 커져서 &hellip;">
+	<meta name="description" content="이 글은 HTML5Rocks의 Chrome DevTools Revolutions 2013을 번역한 글입니다. Introduction # 웹 애플리케이션의 복잡도와 기능 증가와 함께 Chrome DevTools도 같이 커졌다. Paul Irish이 이와 관련해서 구글 &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -29,7 +29,7 @@
 	<li><a href="/">Blog</a></li>
 	<li><a href="/blog/archives">Archives</a></li>
             <li class="menu-cate"><a href="#">Category</a>
-                <ul><li><a href='/blog/categories/amd'>AMD (1)</a></li><li><a href='/blog/categories/chrome'>Chrome (1)</a></li><li><a href='/blog/categories/devtool'>DevTool (1)</a></li><li><a href='/blog/categories/grunt'>Grunt (4)</a></li><li><a href='/blog/categories/javascript'>Javascript (5)</a></li><li><a href='/blog/categories/requirejs'>RequireJS (1)</a></li><li><a href='/blog/categories/translate'>Translate (6)</a></li></ul>
+                <ul><li><a href='/blog/categories/amd'>AMD (1)</a></li><li><a href='/blog/categories/chrome'>Chrome (1)</a></li><li><a href='/blog/categories/devtool'>DevTool (1)</a></li><li><a href='/blog/categories/grunt'>Grunt (5)</a></li><li><a href='/blog/categories/javascript'>Javascript (6)</a></li><li><a href='/blog/categories/requirejs'>RequireJS (1)</a></li><li><a href='/blog/categories/translate'>Translate (7)</a></li></ul>
             </li>
 </ul></nav>
 	<nav id="mobile-nav">
@@ -39,7 +39,7 @@
 	<li><a href="/">Blog</a></li>
 	<li><a href="/blog/archives">Archives</a></li>
             <li class="menu-cate"><a href="#">Category</a>
-                <ul><li><a href='/blog/categories/amd'>AMD (1)</a></li><li><a href='/blog/categories/chrome'>Chrome (1)</a></li><li><a href='/blog/categories/devtool'>DevTool (1)</a></li><li><a href='/blog/categories/grunt'>Grunt (4)</a></li><li><a href='/blog/categories/javascript'>Javascript (5)</a></li><li><a href='/blog/categories/requirejs'>RequireJS (1)</a></li><li><a href='/blog/categories/translate'>Translate (6)</a></li></ul>
+                <ul><li><a href='/blog/categories/amd'>AMD (1)</a></li><li><a href='/blog/categories/chrome'>Chrome (1)</a></li><li><a href='/blog/categories/devtool'>DevTool (1)</a></li><li><a href='/blog/categories/grunt'>Grunt (5)</a></li><li><a href='/blog/categories/javascript'>Javascript (6)</a></li><li><a href='/blog/categories/requirejs'>RequireJS (1)</a></li><li><a href='/blog/categories/translate'>Translate (7)</a></li></ul>
             </li>
 </ul></div>
 		</div>
@@ -91,6 +91,69 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/10/12/chrome-devtools-revolutions-2013-in-korean/">
+		
+			Chrome DevTools Revolutions 2013 in Korean</a>
+	</h2>
+	<div class="entry-content">
+		<blockquote><p>이 글은 HTML5Rocks의 <a href="http://www.html5rocks.com/en/tutorials/developertools/revolutions2013/#toc-canvas-profiling">Chrome DevTools Revolutions 2013</a>을 번역한 글입니다.</p></blockquote>
+
+<h2>Introduction <a href="" id="introduction">#</a></h2>
+
+<p>웹 애플리케이션의 복잡도와 기능 증가와 함께 Chrome DevTools도 같이 커졌다. Paul Irish이 이와 관련해서 구글 I/O 2013에서 <a href="https://www.youtube.com/watch?v=x6qe_kVaBpg">Chrome DevTools Revolutions 2013</a>라는 발표를 했다. 웹 앱을 제작하고 테스트하는 방법을 혁신할 수 있는 DevTools의 최신 기능을 볼 수 있다.</p>
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/x6qe_kVaBpg" frameborder="0" allowfullscreen></iframe>
+
+
+<p>파울의 발표를 못봤다면 위에있는 동영상을 보자.(기다릴테니 보고오삼.) 아니면 다음 기능 목록으로 건너뛰자.</p>
+
+<ul>
+<li>개발용 코드 에디터로 DevTools의 <a href="#workspaces">Workspaces</a>를 사용하자.</li>
+<li>Sass를 사용한다면, DevTools에서 Sass(.scss) 파일을 라이브 에디팅하는 기능에 주목하자. 변경사항이 즉시 페이지에 반영된다.</li>
+<li>기존에도 안드로이드용 크롬의 페이지를 원격으로 디버깅할 수 있기는 했지만, 이제 <a href="#adb_extension">ADB extension</a>이 안드로이드 기기와의 연결을 담당한다. 그리고 <a href="#reverse_port_forwarding">Reverse port forwarding</a>로 안드로이드 장비에서 여러분의 개발 머신의 localhost로 쉽게 연결하자.</li>
+<li>성능은 항상 웹 앱의 주요 관심사다. 그래서 DevTools은 병목현상 추적을 돕는 몇가지 새로운 기능을 추가했다. CPU 프로파일링을 위한 <a href="#flame_chart">Flame Chart</a> 시각화, 렌더링 관련 성능 문제와 사용 메모리을 디버깅하기 위한 <a href="#performance_features">몇가지 새로운 도구</a>를 제공한다.
+이 기능들은 크롬 stable 버전 28부터 제공한다.</li>
+</ul>
+
+
+
+		
+		<a href="/blog/2013/10/12/chrome-devtools-revolutions-2013-in-korean/" class="more-link">Read on &rarr;</a>
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-12T23:59:00+09:00" pubdate data-updated="true">Oct 12<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/chrome/'>Chrome</a>, <a class='category' href='/blog/categories/devtool/'>DevTool</a>, <a class='category' href='/blog/categories/translate/'>Translate</a>
+
+
+</div>
+	
+	<div class="comments"><a href="/blog/2013/10/12/chrome-devtools-revolutions-2013-in-korean/#disqus_thread">Comments</a></div>
+
+	
+</div>
+</article>
 
 
     <article class="post">

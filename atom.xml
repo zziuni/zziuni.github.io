@@ -4,7 +4,7 @@
   <title><![CDATA[zziuni's Blog]]></title>
   <link href="http://zziuni.github.io/atom.xml" rel="self"/>
   <link href="http://zziuni.github.io/"/>
-  <updated>2013-12-01T18:21:37+09:00</updated>
+  <updated>2013-12-17T18:20:02+09:00</updated>
   <id>http://zziuni.github.io/</id>
   <author>
     <name><![CDATA[zziuni]]></name>
@@ -14,11 +14,27 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Gruntjs.com을 우리말로 번역했습니다.]]></title>
+    <link href="http://zziuni.github.io/blog/2013/12/17/gruntjs-dot-com-translated-to-korean/"/>
+    <updated>2013-12-17T17:35:00+09:00</updated>
+    <id>http://zziuni.github.io/blog/2013/12/17/gruntjs-dot-com-translated-to-korean</id>
+    <content type="html"><![CDATA[<p>Grunt 문서 몇 개를 번역해서 올리다가.. Gruntjs Repo를 확인해보니 사이트와 사이트 콘텐츠도 Github으로 관리되고 있길래, 포크(<a href="https://github.com/zziuni/gruntjs.com">gruntjs.com</a>, <a href="https://github.com/zziuni/grunt-docs">grunt-docs</a>) 받아서 그리로 통합했습니다.
+이제 <strong>Grunt 사이트는 한글로 <a href="http://gurntjs-kr.herokuapp.com/">http://gurntjs-kr.herokuapp.com/</a>에서 볼 수 있습니다.</strong></p>
+
+<p>첨에 신나서 배포하다가 오타(gurnt)낸 걸 알고, 소심해서 얼른 올바른 주소(?)를 하나 더 배포했습니다.</p>
+
+<p>그냥 순서대로 번역 중입니다. 중요한 건 다 번역 듯하지만 아직 번역 안 된 문서는 짬짬이 번역해 올릴 겁니다. 오타나 번역오류를 찾으면 <a href="https://github.com/zziuni/grunt-docs/issues">Github Issues</a>에 올려주세요.</p>
+
+<p>국내에서도 Grunt를 좀 더 많이 썼으면 좋겠네요.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Grunt: Create tasks in korean]]></title>
     <link href="http://zziuni.github.io/blog/2013/12/01/grunt-create-tasks-in-korean/"/>
     <updated>2013-12-01T12:11:00+09:00</updated>
     <id>http://zziuni.github.io/blog/2013/12/01/grunt-create-tasks-in-korean</id>
-    <content type="html"><![CDATA[<blockquote><p><a href="http://gruntjs.com">Grunt</a>은 Javascript Task Runner 입니다.. 이 문서는 Grunt 공식 사이트의 <a href="http://gruntjs.com/creating-tasks">Create tasks</a>를 번역한 문서이며 grunt-cli의 버전이 0.1.11일 때 번역했습니다.</p></blockquote>
+    <content type="html"><![CDATA[<blockquote><p><a href="http://zziuni.pe.kr">Grunt</a>은 Javascript Task Runner 입니다.. 이 문서는 Grunt 공식 사이트의 <a href="http://gruntjs.com/creating-tasks">Create tasks</a>를 번역한 문서이며 grunt-cli의 버전이 0.1.11일 때 번역했습니다.</p></blockquote>
 
 <h1>Create tasks</h1>
 

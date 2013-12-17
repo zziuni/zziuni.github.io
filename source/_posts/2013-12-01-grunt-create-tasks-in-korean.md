@@ -6,7 +6,7 @@ comments: true
 categories: [Grunt, Javascript, Translate]
 ---
 
->[Grunt](http://gruntjs.com)은 Javascript Task Runner 입니다.. 이 문서는 Grunt 공식 사이트의 [Create tasks](http://gruntjs.com/creating-tasks)를 번역한 문서이며 grunt-cli의 버전이 0.1.11일 때 번역했습니다.
+>[Grunt]은 Javascript Task Runner 입니다.. 이 문서는 Grunt 공식 사이트의 [Create tasks](http://gruntjs.com/creating-tasks)를 번역한 문서이며 grunt-cli의 버전이 0.1.11일 때 번역했습니다.
 
 
 # Create tasks
@@ -236,7 +236,7 @@ grunt.registerTask('asyncme', 'My asynchronous task.', function() {
 ```
 
 
-
+[Grunt]: http://zziuni.pe.kr
 
 
 
